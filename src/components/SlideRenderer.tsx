@@ -108,10 +108,18 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               className="relative mx-auto aspect-square w-full max-w-md"
             >
-              <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-orange/40 via-cream to-green/30 blur-2xl opacity-70" />
-              <div className="relative grid h-full w-full place-items-center rounded-[2.5rem] glass">
-                <img src={logo} alt="Kerry's Table" className="size-2/3 object-contain" />
-              </div>
+              <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-orange/40 via-cream to-green/30 blur-2xl opacity-80" />
+              <motion.div
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="relative h-full w-full overflow-hidden rounded-[2.5rem] glass"
+              >
+                <img src={heroImage} alt="Healthy plate" className="absolute inset-0 size-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-green/40 via-transparent to-transparent" />
+                <div className="absolute bottom-4 right-4 grid size-20 place-items-center rounded-full bg-white/85 backdrop-blur">
+                  <img src={logo} alt="Kerry's Table" className="size-14 object-contain" />
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
