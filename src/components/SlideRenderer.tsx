@@ -836,8 +836,18 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
           </div>
         </div>
       );
-  }
+    }
+  })();
+
+  return (
+    <div className="relative h-full w-full">
+      {!noBadge && <SlideImageBadge src={heroImage} alt={heroAlt} />}
+      {content}
+    </div>
+  );
 }
+
+// Update SlideShell to leave breathing room for the floating image and bottom nav.
 
 function SlideShell({
   children,
