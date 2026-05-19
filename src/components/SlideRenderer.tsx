@@ -259,8 +259,8 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
                 {...stagger(i + 2)}
                 className="glass rounded-2xl p-5 text-center"
               >
-                <div className="text-3xl mb-2">⚠️</div>
-                <div className="text-sm font-semibold text-foreground/85">{it}</div>
+                <div className="text-orange text-xs tracking-[0.2em] uppercase mb-2 font-medium">No. {String(i + 1).padStart(2, "0")}</div>
+                <div className="text-sm font-medium text-foreground/85">{it}</div>
               </motion.div>
             ))}
           </div>
