@@ -73,9 +73,12 @@ function Eyebrow({ children, variant = "orange" }: { children: React.ReactNode; 
 export function SlideRenderer({ slide, index }: { slide: Slide; index: number }) {
   const heroImage = imageFor(index);
   const heroAlt = "Nutrition imagery";
+  // Slides that already feature a large hero image — skip the floating badge.
+  const noBadge = slide.kind === "cover" || slide.kind === "coach-profile" || slide.kind === "conclusion";
 
-  switch (slide.kind) {
-    case "cover":
+  const content: React.ReactNode = (() => {
+    switch (slide.kind) {
+      case "cover":
       return (
         <div className="grid h-full w-full place-items-center px-8 md:px-16">
           <div className="grid w-full max-w-7xl grid-cols-1 items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
