@@ -34,9 +34,30 @@ export function Deck() {
   }, [index, go, total]);
 
   const variants = {
-    enter: (d: number) => ({ opacity: 0, x: d * 80, scale: 0.98 }),
-    center: { opacity: 1, x: 0, scale: 1 },
-    exit: (d: number) => ({ opacity: 0, x: -d * 80, scale: 0.98 }),
+    enter: (d: number) => ({
+      opacity: 0,
+      x: d * 220,
+      scale: 0.92,
+      rotateY: d * 12,
+      filter: "blur(14px)",
+      clipPath: d > 0 ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)",
+    }),
+    center: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      rotateY: 0,
+      filter: "blur(0px)",
+      clipPath: "inset(0 0 0 0)",
+    },
+    exit: (d: number) => ({
+      opacity: 0,
+      x: -d * 220,
+      scale: 0.94,
+      rotateY: -d * 10,
+      filter: "blur(14px)",
+      clipPath: d > 0 ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)",
+    }),
   };
 
   const slide = slides[index];
