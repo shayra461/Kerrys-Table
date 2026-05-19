@@ -70,7 +70,7 @@ export function Deck() {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] as const }}
             className="absolute inset-0 flex items-center justify-center"
           >
             <SlideRenderer slide={slide} />
@@ -95,7 +95,7 @@ export function Deck() {
               <motion.div
                 className="h-full bg-gradient-to-r from-orange to-green"
                 animate={{ width: `${progress}%` }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] as const }}
               />
             </div>
             <div className="mt-2 flex justify-center gap-1">

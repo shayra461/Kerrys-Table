@@ -2,14 +2,19 @@ import type { Slide } from "@/data/slides";
 import { motion } from "framer-motion";
 import logo from "@/assets/logo.svg";
 
+const EASE = [0.22, 1, 0.36, 1] as const;
 const fadeUp = {
   initial: { opacity: 0, y: 28 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-};
+  transition: { duration: 0.7, ease: EASE },
+} as const;
 
 function stagger(i: number) {
-  return { ...fadeUp, transition: { ...fadeUp.transition, delay: 0.08 + i * 0.05 } };
+  return {
+    initial: { opacity: 0, y: 28 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.7, ease: EASE, delay: 0.08 + i * 0.05 },
+  } as const;
 }
 
 function ToneDot({ tone }: { tone: "low" | "mid" | "high" }) {
