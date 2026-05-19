@@ -707,6 +707,98 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
           )}
         </SlideShell>
       );
+
+    case "macros-overview":
+      return (
+        <SlideShell eyebrow="Macronutrients">
+          <Title>{slide.title}</Title>
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {slide.items.map((m, i) => (
+              <motion.div
+                key={i}
+                {...stagger(i + 1)}
+                whileHover={{ y: -8 }}
+                className="glass relative overflow-hidden rounded-3xl p-7"
+              >
+                <div className={`absolute -right-6 -top-6 size-28 rounded-full opacity-20 ${m.color === "green" ? "bg-green" : "bg-orange"}`} />
+                <div className={`text-sm font-mono tracking-widest ${m.color === "green" ? "text-green" : "text-orange"}`}>{m.n}</div>
+                <div className="mt-2 text-3xl font-bold text-foreground">{m.name}</div>
+                <p className="mt-3 text-base text-foreground/75 leading-relaxed">{m.desc}</p>
+                <div className="mt-5 border-t border-foreground/10 pt-4 text-sm text-foreground/65 italic">
+                  {m.examples}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </SlideShell>
+      );
+
+    case "balanced-plate": {
+      const colorMap = {
+        green: "from-green/60 to-green/30",
+        orange: "from-orange/60 to-orange/30",
+        amber: "from-amber-400/70 to-amber-300/30",
+        cream: "from-cream to-amber-100/40",
+      } as const;
+      return (
+        <SlideShell eyebrow="The Plate">
+          <Title>{slide.title}</Title>
+          <motion.p {...stagger(1)} className="mt-6 text-xl text-foreground/75 max-w-3xl">{slide.lead}</motion.p>
+          <div className="mt-10 grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
+            <div className="grid gap-4">
+              {slide.portions.map((p, i) => (
+                <motion.div key={i} {...stagger(i + 2)} className="glass flex items-center gap-5 rounded-2xl p-5">
+                  <div className={`grid size-20 shrink-0 place-items-center rounded-2xl bg-gradient-to-br ${colorMap[p.color]} text-3xl font-bold text-green`}>
+                    {p.pct}
+                  </div>
+                  <div>
+                    <div className="text-xl font-bold text-foreground">{p.label}</div>
+                    <div className="text-sm text-foreground/70">{p.desc}</div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            <motion.div {...stagger(6)} className="glass rounded-3xl p-7">
+              <div className="text-green font-bold tracking-widest text-sm">PORTION GUIDE — YOUR HAND</div>
+              <div className="mt-5 grid gap-3">
+                {slide.hands.map((h, i) => (
+                  <div key={i} className="flex items-baseline justify-between border-b border-foreground/10 pb-2">
+                    <span className="text-lg font-semibold text-foreground">{h.label}</span>
+                    <span className="text-orange font-mono">{h.portion}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </SlideShell>
+      );
+    }
+
+    case "conclusion":
+      return (
+        <div className="grid h-full w-full place-items-center px-8 md:px-16">
+          <div className="max-w-4xl text-center">
+            <Eyebrow>The End — Thank You</Eyebrow>
+            <motion.h1 {...stagger(1)} className="headline mt-6 text-7xl md:text-8xl lg:text-9xl">
+              {slide.title}
+            </motion.h1>
+            <motion.p {...stagger(2)} className="mt-8 text-2xl text-foreground/80 leading-relaxed">
+              {slide.body}
+            </motion.p>
+            <motion.blockquote
+              {...stagger(3)}
+              className="mt-10 text-3xl md:text-4xl italic text-orange font-light"
+            >
+              "{slide.quote}"
+            </motion.blockquote>
+            <motion.div {...stagger(4)} className="mt-12 flex flex-wrap items-center justify-center gap-3">
+              <span className="rounded-full glass px-5 py-2.5 text-sm text-foreground/80">{slide.contact.phone}</span>
+              <span className="rounded-full glass px-5 py-2.5 text-sm text-foreground/80">{slide.contact.email}</span>
+              <span className="rounded-full glass px-5 py-2.5 text-sm text-foreground/80">{slide.contact.site}</span>
+            </motion.div>
+          </div>
+        </div>
+      );
   }
 }
 
