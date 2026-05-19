@@ -82,7 +82,7 @@ export function Deck() {
       </div>
 
       {/* Slide stage */}
-      <div className="relative z-10 h-full w-full">
+      <div className="relative z-10 h-full w-full" style={{ perspective: 1600 }}>
         <AnimatePresence mode="wait" custom={dir}>
           <motion.div
             key={index}
@@ -91,10 +91,11 @@ export function Deck() {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] as const }}
+            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] as const }}
             className="absolute inset-0 flex items-center justify-center"
+            style={{ transformStyle: "preserve-3d" }}
           >
-            <SlideRenderer slide={slide} />
+            <SlideRenderer slide={slide} index={index} />
           </motion.div>
         </AnimatePresence>
       </div>
