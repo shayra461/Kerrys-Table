@@ -59,10 +59,10 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
                   "{slide.tagline}"
                 </span>
               </motion.div>
-              <motion.div {...stagger(4)} className="mt-10 grid gap-2 text-sm md:text-base text-foreground/75">
-                <div>📞 {slide.contact.phone}</div>
-                <div>✉️ {slide.contact.email}</div>
-                <div>🌐 {slide.contact.site}</div>
+              <motion.div {...stagger(4)} className="mt-10 grid gap-1.5 text-sm md:text-base text-foreground/65 font-light tracking-wide">
+                <div>{slide.contact.phone}</div>
+                <div>{slide.contact.email}</div>
+                <div>{slide.contact.site}</div>
               </motion.div>
             </div>
             <motion.div
