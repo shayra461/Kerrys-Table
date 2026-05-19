@@ -1,6 +1,37 @@
 import type { Slide } from "@/data/slides";
 import { motion } from "framer-motion";
 import logo from "@/assets/logo.svg";
+import { imageFor } from "@/data/slideImages";
+
+// Floating decorative image badge shown on every slide.
+function SlideImageBadge({ src, alt }: { src: string; alt: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.7, rotate: -8, x: 40 }}
+      animate={{ opacity: 1, scale: 1, rotate: 0, x: 0 }}
+      transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+      className="pointer-events-none absolute right-6 top-24 z-0 hidden lg:block"
+      aria-hidden
+    >
+      <div className="relative">
+        <div className="absolute -inset-6 rounded-full bg-gradient-to-br from-orange/35 via-cream to-green/30 blur-2xl" />
+        <motion.div
+          animate={{ y: [0, -10, 0], rotate: [0, 2, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          className="relative size-44 overflow-hidden rounded-full ring-4 ring-white/70 shadow-2xl xl:size-56"
+        >
+          <img src={src} alt={alt} className="size-full object-cover" loading="lazy" />
+        </motion.div>
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+          className="absolute -inset-2 rounded-full border border-dashed border-orange/40"
+        />
+      </div>
+    </motion.div>
+  );
+}
+
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const fadeUp = {
