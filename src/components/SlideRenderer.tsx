@@ -170,13 +170,18 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
           <div className="grid items-center gap-12 md:grid-cols-[0.9fr_1.1fr]">
             <motion.div {...stagger(1)} className="relative mx-auto aspect-[3/4] w-full max-w-sm">
               <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-green/40 to-orange/30 blur-2xl" />
-              <div className="relative grid h-full w-full place-items-center rounded-[2rem] glass overflow-hidden">
-                <div className="text-9xl">👩🏽‍🍳</div>
-                <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-white/80 backdrop-blur p-4">
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                className="relative h-full w-full overflow-hidden rounded-[2rem] glass"
+              >
+                <img src={heroImage} alt={slide.name} className="absolute inset-0 size-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-green/70 via-green/10 to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-white/85 backdrop-blur p-4">
                   <div className="text-xl font-bold text-green">{slide.name}</div>
                   <div className="text-sm text-foreground/70">{slide.role}</div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
             <div>
               <Title>{slide.title}</Title>
