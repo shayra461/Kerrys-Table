@@ -859,7 +859,7 @@ function SlideShell({
   eyebrowVariant?: "orange" | "green";
 }) {
   return (
-    <div className="h-full w-full overflow-y-auto px-8 py-12 md:px-16 md:py-16 scrollbar-hide">
+    <div className="relative z-10 h-full w-full overflow-y-auto px-6 pt-28 pb-40 md:px-16 md:pt-32 md:pb-44 scrollbar-hide">
       <div className="mx-auto max-w-7xl">
         {eyebrow && <Eyebrow variant={eyebrowVariant}>{eyebrow}</Eyebrow>}
         <div className="mt-4">{children}</div>
