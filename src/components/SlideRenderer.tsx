@@ -124,12 +124,12 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
         <SlideShell eyebrow="Meet Your Coach">
           <div className="grid items-center gap-12 md:grid-cols-[0.9fr_1.1fr]">
             <motion.div {...stagger(1)} className="relative mx-auto aspect-[3/4] w-full max-w-sm">
-              <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-green/40 to-orange/30 blur-2xl" />
-              <div className="relative grid h-full w-full place-items-center rounded-[2rem] glass overflow-hidden">
-                <div className="text-9xl">👩🏽‍🍳</div>
-                <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-white/80 backdrop-blur p-4">
-                  <div className="text-xl font-bold text-green">{slide.name}</div>
-                  <div className="text-sm text-foreground/70">{slide.role}</div>
+              <div className="relative grid h-full w-full place-items-end rounded-sm glass overflow-hidden bg-gradient-to-br from-green-soft via-cream to-orange-soft">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.6),transparent_60%)]" />
+                <div className="relative w-full p-6">
+                  <div className="rule mb-4" />
+                  <div className="font-display text-3xl text-green">{slide.name}</div>
+                  <div className="text-sm text-foreground/60 tracking-wider uppercase mt-1">{slide.role}</div>
                 </div>
               </div>
             </motion.div>
