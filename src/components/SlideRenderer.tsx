@@ -1,6 +1,37 @@
 import type { Slide } from "@/data/slides";
 import { motion } from "framer-motion";
 import logo from "@/assets/logo.svg";
+import { imageFor } from "@/data/slideImages";
+
+// Floating decorative image badge shown on every slide.
+function SlideImageBadge({ src, alt }: { src: string; alt: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.7, rotate: -8, x: 40 }}
+      animate={{ opacity: 1, scale: 1, rotate: 0, x: 0 }}
+      transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+      className="pointer-events-none absolute right-6 top-24 z-0 hidden lg:block"
+      aria-hidden
+    >
+      <div className="relative">
+        <div className="absolute -inset-6 rounded-full bg-gradient-to-br from-orange/35 via-cream to-green/30 blur-2xl" />
+        <motion.div
+          animate={{ y: [0, -10, 0], rotate: [0, 2, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          className="relative size-44 overflow-hidden rounded-full ring-4 ring-white/70 shadow-2xl xl:size-56"
+        >
+          <img src={src} alt={alt} className="size-full object-cover" loading="lazy" />
+        </motion.div>
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+          className="absolute -inset-2 rounded-full border border-dashed border-orange/40"
+        />
+      </div>
+    </motion.div>
+  );
+}
+
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const fadeUp = {
@@ -39,9 +70,15 @@ function Eyebrow({ children, variant = "orange" }: { children: React.ReactNode; 
   );
 }
 
-export function SlideRenderer({ slide }: { slide: Slide }) {
-  switch (slide.kind) {
-    case "cover":
+export function SlideRenderer({ slide, index }: { slide: Slide; index: number }) {
+  const heroImage = imageFor(index);
+  const heroAlt = "Nutrition imagery";
+  // Slides that already feature a large hero image — skip the floating badge.
+  const noBadge = slide.kind === "cover" || slide.kind === "coach-profile" || slide.kind === "conclusion";
+
+  const content: React.ReactNode = (() => {
+    switch (slide.kind) {
+      case "cover":
       return (
         <div className="grid h-full w-full place-items-center px-8 md:px-16">
           <div className="grid w-full max-w-7xl grid-cols-1 items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
@@ -71,10 +108,18 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               className="relative mx-auto aspect-square w-full max-w-md"
             >
-              <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-orange/40 via-cream to-green/30 blur-2xl opacity-70" />
-              <div className="relative grid h-full w-full place-items-center rounded-[2.5rem] glass">
-                <img src={logo} alt="Kerry's Table" className="size-2/3 object-contain" />
-              </div>
+              <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-orange/40 via-cream to-green/30 blur-2xl opacity-80" />
+              <motion.div
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="relative h-full w-full overflow-hidden rounded-[2.5rem] glass"
+              >
+                <img src={heroImage} alt="Healthy plate" className="absolute inset-0 size-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-green/40 via-transparent to-transparent" />
+                <div className="absolute bottom-4 right-4 grid size-20 place-items-center rounded-full bg-white/85 backdrop-blur">
+                  <img src={logo} alt="Kerry's Table" className="size-14 object-contain" />
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -125,13 +170,18 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
           <div className="grid items-center gap-12 md:grid-cols-[0.9fr_1.1fr]">
             <motion.div {...stagger(1)} className="relative mx-auto aspect-[3/4] w-full max-w-sm">
               <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-green/40 to-orange/30 blur-2xl" />
-              <div className="relative grid h-full w-full place-items-center rounded-[2rem] glass overflow-hidden">
-                <div className="text-9xl">👩🏽‍🍳</div>
-                <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-white/80 backdrop-blur p-4">
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                className="relative h-full w-full overflow-hidden rounded-[2rem] glass"
+              >
+                <img src={heroImage} alt={slide.name} className="absolute inset-0 size-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-green/70 via-green/10 to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-white/85 backdrop-blur p-4">
                   <div className="text-xl font-bold text-green">{slide.name}</div>
                   <div className="text-sm text-foreground/70">{slide.role}</div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
             <div>
               <Title>{slide.title}</Title>
@@ -776,8 +826,16 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
 
     case "conclusion":
       return (
-        <div className="grid h-full w-full place-items-center px-8 md:px-16">
+        <div className="grid h-full w-full place-items-center overflow-y-auto px-6 pt-28 pb-40 md:px-16 scrollbar-hide">
           <div className="max-w-4xl text-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="mx-auto mb-8 size-32 overflow-hidden rounded-full ring-4 ring-white/70 shadow-2xl"
+            >
+              <img src={heroImage} alt="Thank you" className="size-full object-cover" />
+            </motion.div>
             <Eyebrow>The End — Thank You</Eyebrow>
             <motion.h1 {...stagger(1)} className="headline mt-6 text-7xl md:text-8xl lg:text-9xl">
               {slide.title}
@@ -799,8 +857,18 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
           </div>
         </div>
       );
-  }
+    }
+  })();
+
+  return (
+    <div className="relative h-full w-full">
+      {!noBadge && <SlideImageBadge src={heroImage} alt={heroAlt} />}
+      {content}
+    </div>
+  );
 }
+
+// Update SlideShell to leave breathing room for the floating image and bottom nav.
 
 function SlideShell({
   children,
@@ -812,7 +880,7 @@ function SlideShell({
   eyebrowVariant?: "orange" | "green";
 }) {
   return (
-    <div className="h-full w-full overflow-y-auto px-8 py-12 md:px-16 md:py-16 scrollbar-hide">
+    <div className="relative z-10 h-full w-full overflow-y-auto px-6 pt-28 pb-40 md:px-16 md:pt-32 md:pb-44 scrollbar-hide">
       <div className="mx-auto max-w-7xl">
         {eyebrow && <Eyebrow variant={eyebrowVariant}>{eyebrow}</Eyebrow>}
         <div className="mt-4">{children}</div>
