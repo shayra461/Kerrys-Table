@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { slides } from "@/data/slides";
 import { SlideRenderer } from "./SlideRenderer";
-import { FloatingFruits } from "./FloatingFruits";
+
 import logo from "@/assets/logo.svg";
 
 export function Deck() {
