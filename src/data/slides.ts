@@ -57,7 +57,8 @@ export const slides: Slide[] = [
       { n: "06", label: "Better vs Less-Ideal Choices" },
       { n: "07", label: "Calorie Reference Guide" },
       { n: "08", label: "Micronutrients & Vitamins" },
-      { n: "09", label: "Your Health, Your Responsibility" },
+      { n: "09", label: "Macros, Good Foods & The Plate" },
+      { n: "10", label: "Your Health, Your Responsibility" },
     ],
   },
   {
