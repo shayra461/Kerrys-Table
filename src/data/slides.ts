@@ -24,7 +24,10 @@ export type Slide =
   | { kind: "cal-list"; title: string; eyebrow?: string; groups: { name: string; tone: "low" | "mid" | "high"; items: { f: string; c: string }[] }[] }
   | { kind: "micros-intro"; title: string; body: string; supports: string[] }
   | { kind: "vitamins-split"; title: string; water: { name: string; note: string; items: string[] }; fat: { name: string; note: string; items: string[] } }
-  | { kind: "vitamin-cards"; title: string; lead?: string; items: { name: string; desc: string; sources: string }[]; pattern?: string[] };
+  | { kind: "vitamin-cards"; title: string; lead?: string; items: { name: string; desc: string; sources: string }[]; pattern?: string[] }
+  | { kind: "macros-overview"; title: string; items: { n: string; name: string; desc: string; examples: string; color: "orange" | "green" }[] }
+  | { kind: "balanced-plate"; title: string; lead: string; portions: { pct: string; label: string; desc: string; color: "green" | "orange" | "cream" | "amber" }[]; hands: { label: string; portion: string }[] }
+  | { kind: "conclusion"; title: string; body: string; quote: string; contact: { phone: string; email: string; site: string } };
 
 export const slides: Slide[] = [
   {
