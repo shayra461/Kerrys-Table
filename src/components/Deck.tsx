@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { slides } from "@/data/slides";
 import { SlideRenderer } from "./SlideRenderer";
-
+import { FloatingFruits } from "./FloatingFruits";
 import logo from "@/assets/logo.svg";
 
 export function Deck() {
@@ -44,8 +44,8 @@ export function Deck() {
 
   return (
     <div className="relative h-screen w-screen overflow-hidden">
-      <div className="deck-bg" />
-
+      <div className="deck-bg deck-grain" />
+      <FloatingFruits />
 
       {/* Top bar: logo + counter */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex items-center justify-between px-6 py-5 md:px-10">
