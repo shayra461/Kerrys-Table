@@ -826,8 +826,16 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
 
     case "conclusion":
       return (
-        <div className="grid h-full w-full place-items-center px-8 md:px-16">
+        <div className="grid h-full w-full place-items-center overflow-y-auto px-6 pt-28 pb-40 md:px-16 scrollbar-hide">
           <div className="max-w-4xl text-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="mx-auto mb-8 size-32 overflow-hidden rounded-full ring-4 ring-white/70 shadow-2xl"
+            >
+              <img src={heroImage} alt="Thank you" className="size-full object-cover" />
+            </motion.div>
             <Eyebrow>The End — Thank You</Eyebrow>
             <motion.h1 {...stagger(1)} className="headline mt-6 text-7xl md:text-8xl lg:text-9xl">
               {slide.title}
