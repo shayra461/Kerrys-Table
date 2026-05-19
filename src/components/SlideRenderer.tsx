@@ -70,7 +70,10 @@ function Eyebrow({ children, variant = "orange" }: { children: React.ReactNode; 
   );
 }
 
-export function SlideRenderer({ slide }: { slide: Slide }) {
+export function SlideRenderer({ slide, index }: { slide: Slide; index: number }) {
+  const heroImage = imageFor(index);
+  const heroAlt = "Nutrition imagery";
+
   switch (slide.kind) {
     case "cover":
       return (
