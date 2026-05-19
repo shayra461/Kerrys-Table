@@ -806,4 +806,73 @@ export const slides: Slide[] = [
       { name: "B12", desc: "Supports nerve function & energy production.", sources: "Meat, fish, eggs, dairy." },
     ],
   },
+  {
+    kind: "macros-overview",
+    title: "Macronutrients",
+    items: [
+      { n: "01", name: "Protein", desc: "Supports muscle repair, metabolism, fullness, and immune function.", examples: "Chicken, turkey, fish, eggs, Greek yogurt, tofu, beans, lentils.", color: "green" },
+      { n: "02", name: "Carbohydrates", desc: "Provide energy for the brain and body — especially during exercise.", examples: "Fruit, oats, rice, potatoes, quinoa, whole-grain bread, beans.", color: "orange" },
+      { n: "03", name: "Fats", desc: "Support hormones, brain health, vitamin absorption, and long-lasting energy.", examples: "Avocado, olive oil, nuts, seeds, nut butters, salmon, sardines.", color: "green" },
+    ],
+  },
+  {
+    kind: "choices",
+    title: "Good Carbohydrates",
+    eyebrow: "Fiber · Vitamins · Stable Blood Sugar",
+    tone: "better",
+    items: [
+      "Oats", "Brown rice", "Quinoa", "Potatoes", "Sweet potatoes",
+      "Whole-grain bread or wraps", "Whole-grain pasta",
+      "Beans", "Lentils", "Berries, apples, bananas, oranges",
+    ],
+  },
+  {
+    kind: "choices",
+    title: "Good Protein",
+    eyebrow: "Lean & Filling — Fullness · Muscle · Metabolism",
+    tone: "better",
+    items: [
+      "Chicken breast", "Turkey", "Lean ground beef or turkey",
+      "Eggs", "Greek yogurt", "Cottage cheese",
+      "Fish (salmon, tuna, cod)", "Shrimp",
+      "Tofu", "Beans & lentils",
+    ],
+  },
+  {
+    kind: "choices",
+    title: "Good Fats",
+    eyebrow: "Heart-Healthy — Hormones · Brain · Satiety",
+    tone: "better",
+    items: [
+      "Avocado", "Olive oil",
+      "Almonds, walnuts, cashews",
+      "Chia, flax, pumpkin, sunflower seeds",
+      "Nut butters",
+      "Fatty fish (salmon, sardines, mackerel)",
+    ],
+  },
+  {
+    kind: "balanced-plate",
+    title: "A Balanced Plate",
+    lead: "A clear, everyday plate looks like this:",
+    portions: [
+      { pct: "½", label: "Vegetables", desc: "Broccoli, spinach, mixed greens, peppers, zucchini.", color: "green" },
+      { pct: "¼", label: "Lean Protein", desc: "Grilled chicken, salmon, tofu, beans, or eggs.", color: "orange" },
+      { pct: "¼", label: "Smart Carbs", desc: "Brown rice, quinoa, sweet potato, whole-grain pasta.", color: "amber" },
+      { pct: "+", label: "Healthy Fats", desc: "Olive oil, avocado, nuts, seeds — in small amounts.", color: "cream" },
+    ],
+    hands: [
+      { label: "Protein", portion: "1 palm" },
+      { label: "Carbs", portion: "1 fist" },
+      { label: "Healthy fats", portion: "1 thumb" },
+      { label: "Veggies", portion: "2 cupped hands" },
+    ],
+  },
+  {
+    kind: "conclusion",
+    title: "Conclusion",
+    body: "Good nutrition is not about restriction — it's about making better choices, understanding your food, and taking control of your health.",
+    quote: "Remember — your body deserves the best.",
+    contact: { phone: "954-496-4142", email: "Kerrystable@gmail.com", site: "www.kerrystable.com" },
+  },
 ];
