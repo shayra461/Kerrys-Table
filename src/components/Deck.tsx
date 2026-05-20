@@ -4,7 +4,7 @@ import { slides } from "@/data/slides";
 import { SlideRenderer } from "./SlideRenderer";
 import { FloatingFruits } from "./FloatingFruits";
 import { imageFor } from "@/data/slideImages";
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/logo.png";
 
 export function Deck() {
   const [index, setIndex] = useState(0);
