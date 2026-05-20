@@ -827,33 +827,76 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
 
     case "conclusion":
       return (
-        <div className="grid h-full w-full place-items-center overflow-y-auto px-6 pt-28 pb-40 md:px-16 scrollbar-hide">
-          <div className="max-w-4xl text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="mx-auto mb-8 size-32 overflow-hidden rounded-full ring-4 ring-white/70 shadow-2xl"
-            >
-              <img src={heroImage} alt="Thank you" className="size-full object-cover" />
+        <div className="relative grid h-full w-full place-items-center overflow-y-auto px-6 pt-24 pb-32 md:px-16 scrollbar-hide">
+          {/* Decorative background orbs for balance */}
+          <div aria-hidden className="pointer-events-none absolute -top-10 -left-10 size-72 rounded-full bg-orange/20 blur-3xl" />
+          <div aria-hidden className="pointer-events-none absolute -bottom-16 -right-10 size-80 rounded-full bg-green/20 blur-3xl" />
+          <div aria-hidden className="pointer-events-none absolute top-1/3 right-1/4 size-40 rounded-full bg-cream blur-2xl opacity-60" />
+
+          <div className="relative mx-auto w-full max-w-5xl text-center">
+            {/* Eyebrow centered on top */}
+            <motion.div {...stagger(0)} className="flex justify-center">
+              <Eyebrow>The End — Thank You</Eyebrow>
             </motion.div>
-            <Eyebrow>The End — Thank You</Eyebrow>
-            <motion.h1 {...stagger(1)} className="headline mt-6 text-7xl md:text-8xl lg:text-9xl">
-              {slide.title}
-            </motion.h1>
-            <motion.p {...stagger(2)} className="mt-8 text-2xl text-foreground/80 leading-relaxed">
+
+            {/* Portrait with decorative ring */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+              className="relative mx-auto mt-8 w-fit"
+            >
+              <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-orange/40 via-cream to-green/40 blur-xl" />
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="relative size-36 md:size-40 overflow-hidden rounded-full ring-4 ring-white shadow-2xl"
+              >
+                <img src={coachPortrait} alt="Kerry-Ann Walker" className="size-full object-cover" />
+              </motion.div>
+            </motion.div>
+
+            {/* Title with flanking decorative lines */}
+            <motion.div {...stagger(1)} className="mt-10 flex items-center justify-center gap-6">
+              <div className="hidden md:block h-px w-24 bg-gradient-to-r from-transparent to-green/40" />
+              <h1 className="headline text-6xl md:text-7xl lg:text-8xl leading-none">
+                {slide.title}
+              </h1>
+              <div className="hidden md:block h-px w-24 bg-gradient-to-l from-transparent to-green/40" />
+            </motion.div>
+
+            {/* Leaf divider */}
+            <motion.div {...stagger(2)} className="mt-6 flex justify-center text-2xl" aria-hidden>
+              <span>🌿</span>
+            </motion.div>
+
+            {/* Body */}
+            <motion.p {...stagger(3)} className="mx-auto mt-6 max-w-2xl text-xl md:text-2xl text-foreground/80 leading-relaxed">
               {slide.body}
             </motion.p>
-            <motion.blockquote
-              {...stagger(3)}
-              className="mt-10 text-3xl md:text-4xl italic text-orange font-light"
-            >
-              "{slide.quote}"
-            </motion.blockquote>
-            <motion.div {...stagger(4)} className="mt-12 flex flex-wrap items-center justify-center gap-3">
-              <span className="rounded-full glass px-5 py-2.5 text-sm text-foreground/80">{slide.contact.phone}</span>
-              <span className="rounded-full glass px-5 py-2.5 text-sm text-foreground/80">{slide.contact.email}</span>
-              <span className="rounded-full glass px-5 py-2.5 text-sm text-foreground/80">{slide.contact.site}</span>
+
+            {/* Quote card */}
+            <motion.div {...stagger(4)} className="mx-auto mt-10 max-w-2xl">
+              <div className="relative rounded-3xl glass px-8 py-6 shadow-xl">
+                <span className="absolute -top-4 left-6 text-5xl text-orange/70 font-serif leading-none">“</span>
+                <blockquote className="text-2xl md:text-3xl italic text-orange font-light">
+                  {slide.quote}
+                </blockquote>
+                <span className="absolute -bottom-8 right-6 text-5xl text-orange/70 font-serif leading-none">”</span>
+              </div>
+            </motion.div>
+
+            {/* Contact row with icons */}
+            <motion.div {...stagger(5)} className="mt-12 flex flex-wrap items-center justify-center gap-3">
+              <span className="inline-flex items-center gap-2 rounded-full glass px-5 py-3 text-sm md:text-base text-foreground/85 shadow-md">
+                <span aria-hidden>📞</span>{slide.contact.phone}
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full glass px-5 py-3 text-sm md:text-base text-foreground/85 shadow-md">
+                <span aria-hidden>✉️</span>{slide.contact.email}
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full glass px-5 py-3 text-sm md:text-base text-foreground/85 shadow-md">
+                <span aria-hidden>🌐</span>{slide.contact.site}
+              </span>
             </motion.div>
           </div>
         </div>
