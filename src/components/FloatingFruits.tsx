@@ -56,12 +56,12 @@ export function FloatingFruits() {
       {swimmers.map((s, i) => (
         <motion.span
           key={i}
-          className="absolute select-none will-change-transform"
+          className="absolute select-none will-change-transform opacity-25"
           style={{
             left: s.startLeft,
             top: s.startTop,
             fontSize: s.size,
-            filter: "drop-shadow(0 12px 24px rgba(55,119,55,0.18))",
+            filter: "blur(0.4px) drop-shadow(0 8px 16px rgba(55,119,55,0.12))",
           }}
           animate={{
             x: s.path.x.map((v) => `${v}vw`),
