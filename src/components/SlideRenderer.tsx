@@ -3,14 +3,14 @@ import { motion } from "framer-motion";
 import logo from "@/assets/logo.svg";
 import { imageFor } from "@/data/slideImages";
 
-// Floating decorative image badge shown on every slide.
+// Floating decorative image badge — anchored bottom-right so it never overlaps headings.
 function SlideImageBadge({ src, alt }: { src: string; alt: string }) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.7, rotate: -8, x: 40 }}
-      animate={{ opacity: 1, scale: 1, rotate: 0, x: 0 }}
+      initial={{ opacity: 0, scale: 0.7, rotate: -8, y: 30 }}
+      animate={{ opacity: 1, scale: 1, rotate: 0, y: 0 }}
       transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-      className="pointer-events-none absolute right-6 top-24 z-0 hidden lg:block"
+      className="pointer-events-none absolute bottom-28 right-4 z-0 hidden md:block lg:bottom-32 lg:right-8"
       aria-hidden
     >
       <div className="relative">
@@ -18,7 +18,7 @@ function SlideImageBadge({ src, alt }: { src: string; alt: string }) {
         <motion.div
           animate={{ y: [0, -10, 0], rotate: [0, 2, 0] }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="relative size-44 overflow-hidden rounded-full ring-4 ring-white/70 shadow-2xl xl:size-56"
+          className="relative size-28 overflow-hidden rounded-full ring-4 ring-white/70 shadow-2xl md:size-32 lg:size-40 xl:size-48"
         >
           <img src={src} alt={alt} className="size-full object-cover" loading="lazy" />
         </motion.div>
