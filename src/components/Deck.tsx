@@ -10,7 +10,13 @@ export function Deck() {
   const [index, setIndex] = useState(0);
   const [dir, setDir] = useState(1);
   const [gridOpen, setGridOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const total = slides.length;
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 5000);
+    return () => clearTimeout(t);
+  }, []);
 
   const go = useCallback((next: number) => {
     setIndex((cur) => {
@@ -72,6 +78,42 @@ export function Deck() {
 
   return (
     <div className="relative h-screen w-screen overflow-hidden">
+      <AnimatePresence>
+        {loading && (
+          <motion.div
+            key="splash"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7, ease: "easeInOut" }}
+            className="absolute inset-0 z-[100] grid place-items-center bg-cream"
+          >
+            <div className="deck-bg deck-grain absolute inset-0 opacity-60" />
+            <motion.div
+              initial={{ scale: 0.6, opacity: 0, rotate: -10 }}
+              animate={{ scale: 1, opacity: 1, rotate: 0 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              className="relative z-10 flex flex-col items-center gap-8"
+            >
+              <motion.img
+                src={logo}
+                alt="Kerry's Nutrition"
+                className="size-56 md:size-72 object-contain drop-shadow-2xl"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <div className="h-1.5 w-56 overflow-hidden rounded-full bg-white/70">
+                <motion.div
+                  className="h-full bg-gradient-to-r from-orange to-green"
+                  initial={{ width: "0%" }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 5, ease: "easeInOut" }}
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="deck-bg deck-grain" />
       <FloatingFruits />
 
