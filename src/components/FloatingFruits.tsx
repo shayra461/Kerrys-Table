@@ -1,28 +1,83 @@
 import { motion } from "framer-motion";
+import { useMemo } from "react";
 
-const fruits = [
-  { emoji: "🍊", x: "6%", y: "18%", size: 64, d: 9 },
-  { emoji: "🥑", x: "88%", y: "14%", size: 72, d: 11 },
-  { emoji: "🍓", x: "10%", y: "78%", size: 56, d: 8 },
-  { emoji: "🥦", x: "84%", y: "76%", size: 70, d: 10 },
-  { emoji: "🍋", x: "50%", y: "8%", size: 48, d: 12 },
-  { emoji: "🫐", x: "92%", y: "46%", size: 44, d: 9.5 },
-  { emoji: "🍎", x: "3%", y: "48%", size: 56, d: 10.5 },
-  { emoji: "🥕", x: "70%", y: "92%", size: 52, d: 8.5 },
-];
+const FRUITS = ["🍊", "🥑", "🍓", "🥦", "🍋", "🫐", "🍎", "🥕", "🍇", "🍑", "🍍", "🥝"];
+
+type Swimmer = {
+  emoji: string;
+  size: number;
+  duration: number;
+  delay: number;
+  path: { x: number[]; y: number[]; rotate: number[] };
+  startLeft: string;
+  startTop: string;
+};
+
+function makeSwimmers(count: number): Swimmer[] {
+  const swimmers: Swimmer[] = [];
+  for (let i = 0; i < count; i++) {
+    const emoji = FRUITS[i % FRUITS.length];
+    const size = 40 + Math.random() * 40;
+    const duration = 22 + Math.random() * 18;
+    const delay = -Math.random() * duration;
+
+    // Generate a meandering path across the whole viewport (in vw/vh deltas)
+    const steps = 5;
+    const x: number[] = [0];
+    const y: number[] = [0];
+    const rotate: number[] = [0];
+    for (let s = 1; s <= steps; s++) {
+      x.push((Math.random() - 0.5) * 160); // -80vw..80vw drift
+      y.push((Math.random() - 0.5) * 140);
+      rotate.push((Math.random() - 0.5) * 90);
+    }
+    x.push(0);
+    y.push(0);
+    rotate.push(0);
+
+    swimmers.push({
+      emoji,
+      size,
+      duration,
+      delay,
+      path: { x, y, rotate },
+      startLeft: `${Math.random() * 90 + 5}%`,
+      startTop: `${Math.random() * 85 + 5}%`,
+    });
+  }
+  return swimmers;
+}
 
 export function FloatingFruits() {
+  const swimmers = useMemo(() => makeSwimmers(14), []);
+
   return (
-    <div className="pointer-events-none fixed inset-0 z-[1]">
-      {fruits.map((f, i) => (
+    <div className="pointer-events-none fixed inset-0 z-[1] overflow-hidden">
+      {swimmers.map((s, i) => (
         <motion.span
           key={i}
-          className="absolute select-none"
-          style={{ left: f.x, top: f.y, fontSize: f.size, filter: "drop-shadow(0 12px 24px rgba(55,119,55,0.18))" }}
-          animate={{ y: [0, -18, 0], rotate: [0, 8, -4, 0] }}
-          transition={{ duration: f.d, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 }}
+          className="absolute select-none will-change-transform"
+          style={{
+            left: s.startLeft,
+            top: s.startTop,
+            fontSize: s.size,
+            filter: "drop-shadow(0 12px 24px rgba(55,119,55,0.18))",
+          }}
+          animate={{
+            x: s.path.x.map((v) => `${v}vw`),
+            y: s.path.y.map((v) => `${v}vh`),
+            rotate: s.path.rotate,
+          }}
+          transition={{
+            duration: s.duration,
+            delay: s.delay,
+            repeat: Infinity,
+            repeatType: "loop",
+            ease: "easeInOut",
+            times: undefined,
+          }}
         >
-          {f.emoji}
+          {s.emoji}
         </motion.span>
       ))}
     </div>
