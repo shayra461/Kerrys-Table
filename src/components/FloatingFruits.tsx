@@ -18,7 +18,7 @@ function makeSwimmers(count: number): Swimmer[] {
   for (let i = 0; i < count; i++) {
     const emoji = FRUITS[i % FRUITS.length];
     const size = 40 + Math.random() * 40;
-    const duration = 22 + Math.random() * 18;
+    const duration = 90 + Math.random() * 70;
     const delay = -Math.random() * duration;
 
     // Generate a meandering path across the whole viewport (in vw/vh deltas)
