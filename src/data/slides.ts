@@ -35,7 +35,7 @@ export const slides: Slide[] = [
     title: "Kerry's Table",
     subtitle: "Nutrition Coaching",
     tagline: "To Better Health",
-    contact: { phone: "954-496-4142", email: "Kerrystable@gmail.com", site: "www.kerrystable.com" },
+    contact: { phone: "954-496-4142", email: "kerrystablenutrition@gmail.com", site: "www.kerrystable.com" },
   },
   {
     kind: "intro",
@@ -873,6 +873,6 @@ export const slides: Slide[] = [
     title: "Conclusion",
     body: "Good nutrition is not about restriction — it's about making better choices, understanding your food, and taking control of your health.",
     quote: "Remember — your body deserves the best.",
-    contact: { phone: "954-496-4142", email: "Kerrystable@gmail.com", site: "www.kerrystable.com" },
+    contact: { phone: "954-496-4142", email: "kerrystablenutrition@gmail.com", site: "www.kerrystable.com" },
   },
 ];
