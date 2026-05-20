@@ -81,7 +81,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
     switch (slide.kind) {
       case "cover":
       return (
-        <div className="grid h-full w-full place-items-center px-8 pt-28 md:px-16 md:pt-32 lg:pt-36">
+        <div className="grid h-full w-full place-items-center overflow-y-auto scrollbar-hide px-8 pt-28 pb-32 md:px-16 md:pt-32 lg:pt-36">
           <div className="grid w-full max-w-7xl grid-cols-1 items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
             <div>
               <Eyebrow>Nutrition Coaching</Eyebrow>
