@@ -3,11 +3,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { slides } from "@/data/slides";
 import { SlideRenderer } from "./SlideRenderer";
 import { FloatingFruits } from "./FloatingFruits";
+import { imageFor } from "@/data/slideImages";
 import logo from "@/assets/logo.svg";
 
 export function Deck() {
   const [index, setIndex] = useState(0);
   const [dir, setDir] = useState(1);
+  const [gridOpen, setGridOpen] = useState(false);
   const total = slides.length;
 
   const go = useCallback((next: number) => {
@@ -20,10 +22,15 @@ export function Deck() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (gridOpen) {
+        if (e.key === "Escape") { e.preventDefault(); setGridOpen(false); return; }
+        return;
+      }
       if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") { e.preventDefault(); go(index + 1); }
       else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); go(index - 1); }
       else if (e.key === "Home") go(0);
       else if (e.key === "End") go(total - 1);
+      else if (e.key.toLowerCase() === "g") { e.preventDefault(); setGridOpen(true); }
       else if (e.key.toLowerCase() === "f") {
         if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
         else document.exitFullscreen?.();
@@ -31,7 +38,7 @@ export function Deck() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [index, go, total]);
+  }, [index, go, total, gridOpen]);
 
   const variants = {
     enter: (d: number) => ({
@@ -68,13 +75,21 @@ export function Deck() {
       <div className="deck-bg deck-grain" />
       <FloatingFruits />
 
-      {/* Top bar: logo + counter */}
+      {/* Top bar: logo + counter + grid toggle */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex items-center justify-between px-6 py-5 md:px-10">
         <div className="pointer-events-auto flex items-center gap-3 rounded-full glass px-3 py-2">
           <img src={logo} alt="Kerry's Table" className="size-8" />
           <div className="pr-2 text-sm font-semibold text-green">Kerry's Table</div>
         </div>
         <div className="pointer-events-auto flex items-center gap-3">
+          <button
+            onClick={() => setGridOpen(true)}
+            className="grid place-items-center rounded-full glass px-4 py-2 text-sm font-mono text-foreground/80 transition hover:bg-white/30"
+            aria-label="Open slide grid"
+            title="Slide grid (G)"
+          >
+            <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </button>
           <div className="rounded-full glass px-4 py-2 text-sm font-mono tabular-nums text-foreground/80">
             {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
           </div>
@@ -144,9 +159,91 @@ export function Deck() {
           </button>
         </div>
         <div className="mt-3 text-center text-xs text-foreground/40 tracking-widest uppercase">
-          ← → to navigate · F for fullscreen
+          ← → to navigate · G for grid · F for fullscreen
         </div>
       </div>
+
+      {/* Slide Grid Overlay */}
+      <AnimatePresence>
+        {gridOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0 z-50 flex flex-col bg-black/80 backdrop-blur-md"
+          >
+            {/* Grid header */}
+            <div className="flex items-center justify-between px-6 py-5 md:px-10">
+              <div className="flex items-center gap-3 rounded-full glass px-4 py-2 text-sm font-semibold text-foreground/90">
+                <img src={logo} alt="Kerry's Table" className="size-6" />
+                Jump to Slide
+              </div>
+              <button
+                onClick={() => setGridOpen(false)}
+                className="grid size-10 place-items-center rounded-full glass text-foreground/70 transition hover:text-foreground"
+                aria-label="Close grid"
+              >
+                <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              </button>
+            </div>
+
+            {/* Thumbnails */}
+            <div className="flex-1 overflow-y-auto px-6 pb-8 md:px-10 scrollbar-hide">
+              <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+                {slides.map((s, i) => {
+                  const img = imageFor(i);
+                  const label =
+                    s.kind === "cover"
+                      ? "Cover"
+                      : s.kind === "toc"
+                        ? "Contents"
+                        : s.kind === "coach-profile"
+                          ? "Coach"
+                          : s.kind === "conclusion"
+                            ? "Thank You"
+                            : "title" in s && typeof s.title === "string"
+                              ? s.title
+                              : `Slide ${i + 1}`;
+                  return (
+                    <motion.button
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.015, duration: 0.35 }}
+                      onClick={() => { go(i); setGridOpen(false); }}
+                      className={`group relative overflow-hidden rounded-2xl border-2 transition-all ${
+                        i === index
+                          ? "border-orange bg-white/15 shadow-xl shadow-orange/20"
+                          : "border-transparent bg-white/5 hover:border-white/30 hover:bg-white/10"
+                      }`}
+                    >
+                      <div className="relative aspect-video w-full overflow-hidden">
+                        <img src={img} alt={label} className="h-full w-full object-cover opacity-80 transition group-hover:opacity-100 group-hover:scale-105" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                        <div className="absolute bottom-2 left-2 right-2">
+                          <div className={`inline-block rounded-full px-2 py-0.5 text-xs font-bold ${
+                            i === index ? "bg-orange text-white" : "bg-white/20 text-white/90"
+                          }`}>
+                            {String(i + 1).padStart(2, "0")}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="px-3 py-2.5 text-left">
+                        <div className={`text-sm font-semibold leading-tight line-clamp-2 ${
+                          i === index ? "text-orange" : "text-foreground/90"
+                        }`}>
+                          {label}
+                        </div>
+                      </div>
+                    </motion.button>
+                  );
+                })}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
