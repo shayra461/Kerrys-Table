@@ -1,6 +1,7 @@
 import type { Slide } from "@/data/slides";
 import { motion } from "framer-motion";
 import logo from "@/assets/logo.svg";
+import coachPortrait from "@/assets/kerry-ann-walker.jpeg";
 import { imageFor } from "@/data/slideImages";
 
 // Floating decorative image badge — anchored bottom-right so it never overlaps headings.
@@ -175,7 +176,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
                 className="relative h-full w-full overflow-hidden rounded-[2rem] glass"
               >
-                <img src={heroImage} alt={slide.name} className="absolute inset-0 size-full object-cover" />
+                <img src={coachPortrait} alt={slide.name} className="absolute inset-0 size-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-green/70 via-green/10 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-white/85 backdrop-blur p-4">
                   <div className="text-xl font-bold text-green">{slide.name}</div>
