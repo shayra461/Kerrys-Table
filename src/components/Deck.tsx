@@ -115,18 +115,18 @@ export function Deck() {
       </div>
 
       {/* Nav controls */}
-      <div className="absolute inset-x-0 bottom-0 z-30 px-6 pb-6 md:px-10 md:pb-8">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
+      <div className="absolute inset-x-0 bottom-0 z-30 px-4 pb-4 md:px-10 md:pb-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 md:gap-4">
           <button
             onClick={() => go(index - 1)}
             disabled={index === 0}
-            className="grid size-14 place-items-center rounded-full glass text-green transition hover:scale-105 hover:text-orange disabled:opacity-30 disabled:hover:scale-100"
+            className="grid size-11 md:size-14 shrink-0 place-items-center rounded-full glass text-green transition hover:scale-105 hover:text-orange disabled:opacity-30 disabled:hover:scale-100"
             aria-label="Previous slide"
           >
-            <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            <svg viewBox="0 0 24 24" className="size-5 md:size-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
           </button>
 
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/60 backdrop-blur">
               <motion.div
                 className="h-full bg-gradient-to-r from-orange to-green"
@@ -134,7 +134,8 @@ export function Deck() {
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] as const }}
               />
             </div>
-            <div className="mt-2 flex justify-center gap-1">
+            {/* Dot row: hidden on mobile (too many slides), shown on tablet+ */}
+            <div className="mt-2 hidden md:flex justify-center gap-1">
               {slides.map((_, i) => (
                 <button
                   key={i}
@@ -146,18 +147,22 @@ export function Deck() {
                 />
               ))}
             </div>
+            {/* Mobile-only compact counter */}
+            <div className="mt-2 text-center text-xs font-mono tabular-nums text-foreground/60 md:hidden">
+              {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+            </div>
           </div>
 
           <button
             onClick={() => go(index + 1)}
             disabled={index === total - 1}
-            className="grid size-14 place-items-center rounded-full glass text-green transition hover:scale-105 hover:text-orange disabled:opacity-30 disabled:hover:scale-100"
+            className="grid size-11 md:size-14 shrink-0 place-items-center rounded-full glass text-green transition hover:scale-105 hover:text-orange disabled:opacity-30 disabled:hover:scale-100"
             aria-label="Next slide"
           >
-            <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            <svg viewBox="0 0 24 24" className="size-5 md:size-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
           </button>
         </div>
-        <div className="mt-3 text-center text-xs text-foreground/40 tracking-widest uppercase">
+        <div className="mt-3 hidden md:block text-center text-xs text-foreground/40 tracking-widest uppercase">
           ← → to navigate · G for grid · F for fullscreen
         </div>
       </div>
