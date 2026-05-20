@@ -77,8 +77,8 @@ export function Deck() {
 
       {/* Top bar: logo + counter + grid toggle */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex items-center justify-between px-6 py-5 md:px-10">
-        <div className="pointer-events-auto flex items-center rounded-full glass p-1.5">
-          <img src={logo} alt="Kerry's Nutrition" className="size-14 object-contain" />
+        <div className="pointer-events-auto flex items-center">
+          <img src={logo} alt="Kerry's Nutrition" className="size-20 md:size-24 object-contain drop-shadow-lg" />
         </div>
         <div className="pointer-events-auto flex items-center gap-3">
           <button
