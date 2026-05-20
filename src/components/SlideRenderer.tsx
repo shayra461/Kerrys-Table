@@ -1,6 +1,6 @@
 import type { Slide } from "@/data/slides";
 import { motion } from "framer-motion";
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/logo.png";
 import coachPortrait from "@/assets/kerry-ann-walker.jpeg";
 import { imageFor } from "@/data/slideImages";
 
