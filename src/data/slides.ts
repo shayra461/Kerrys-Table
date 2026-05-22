@@ -1,4 +1,4 @@
-export type Slide =
+export type Slide = (
   | { kind: "cover"; title: string; subtitle: string; tagline: string; contact: { phone: string; email: string; site: string } }
   | { kind: "intro"; eyebrow: string; title: string; lead: string; quote: string; body: string }
   | { kind: "toc"; title: string; items: { n: string; label: string }[] }
@@ -7,7 +7,7 @@ export type Slide =
   | { kind: "bullets"; eyebrow?: string; title: string; lead?: string; bullets: string[]; quote?: string }
   | { kind: "nutrients"; title: string; items: { icon: string; name: string; desc: string; color: "orange" | "green" }[] }
   | { kind: "balanced"; title: string; lead: string; items: string[]; tag: string }
-  | { kind: "dangers"; title: string; lead: string; items: string[]; quote: string }
+  | { kind: "dangers"; eyebrow?: string; title: string; lead: string; items: string[]; quote: string }
   | { kind: "label"; title: string; lead: string; items: string[]; note: string }
   | { kind: "dv-table"; title: string; intro: string; formula: string; rows: { name: string; value: string }[]; foot: string }
   | { kind: "calc-card"; title: string; food: { label: string; value: string }[]; formula: string; steps: string[]; total: string; rounded?: string }
@@ -27,26 +27,43 @@ export type Slide =
   | { kind: "vitamin-cards"; title: string; lead?: string; items: { name: string; desc: string; sources: string }[]; pattern?: string[] }
   | { kind: "macros-overview"; title: string; items: { n: string; name: string; desc: string; examples: string; color: "orange" | "green" }[] }
   | { kind: "balanced-plate"; title: string; lead: string; portions: { pct: string; label: string; desc: string; color: "green" | "orange" | "cream" | "amber" }[]; hands: { label: string; portion: string }[] }
-  | { kind: "conclusion"; title: string; body: string; quote: string; contact: { phone: string; email: string; site: string } };
+  | { kind: "conclusion"; title: string; body: string; quote: string; contact: { phone: string; email: string; site: string } }
+) & { imageIndex: number };
 
 export const slides: Slide[] = [
+  // --- Chapter 1: The Coach & The Mission ---
   {
     kind: "cover",
+    imageIndex: 0,
     title: "Kerry's Table",
     subtitle: "Nutrition Coaching",
-    tagline: "To Better Health",
+    tagline: "Real Food. Real Results. Real You.",
     contact: { phone: "954-496-4142", email: "kerrystablenutrition@gmail.com", site: "www.kerrystable.com" },
   },
   {
     kind: "intro",
+    imageIndex: 1,
     eyebrow: "Chapter 01",
     title: "Good Nutrition & Its Importance for a Healthy Life",
     lead: "Good Nutrition = Good Health.",
     quote: "We are what we eat.",
-    body: "Welcome, and thank you for being here. Today we explore how nutrition shapes the way we feel, function, and live every single day — because whatever we feed the internal reflects our overall health.",
+    body: "Welcome, and thank you for being here. Today we explore how nutrition shapes the way we feel, function, and live every single day — because what we feed our bodies internally is reflected in our external health.",
+  },
+  {
+    kind: "coach-profile",
+    imageIndex: 3,
+    title: "Meet Your Coach",
+    name: "Kerry-Ann Walker",
+    role: "Founder of Kerry’s Table and Kerry’s Nutrition",
+    body: [
+      "I am a passionate and dedicated Nutrition Coach with a strong love for food, nutrition, cooking, and healthy living.",
+      "I am committed to helping individuals and families create healthier lifestyles through balanced nutrition, mindful eating and sustainable wellness habits to flourish from the inside out with confidence.",
+      "Lastly, Through Kerry’s Table and Kerry’s Nutrition, my mission is rooted in simplicity, consistency and wellness that supports both physical and emotional wellbeing.",
+    ],
   },
   {
     kind: "toc",
+    imageIndex: 2,
     title: "Table of Contents",
     items: [
       { n: "01", label: "The Role of a Nutrition Coach" },
@@ -61,29 +78,25 @@ export const slides: Slide[] = [
       { n: "10", label: "Your Health, Your Responsibility" },
     ],
   },
-  {
-    kind: "coach-profile",
-    title: "Who Is a Nutrition Coach?",
-    name: "Kerry-Ann Walker",
-    role: "Certified Nutrition Coach — CNC",
-    body: [
-      "Nutrition Coaches work with the general population to encourage healthy eating behaviors and empower clients to take responsibility for their own health.",
-      "They are mentors and leaders who guide their clients toward a healthier, more sustainable lifestyle.",
-    ],
-  },
+
+  // --- Chapter 2: The Role of a Nutrition Coach ---
   {
     kind: "definition",
-    eyebrow: "The Practice",
+    imageIndex: 4,
+    eyebrow: "Chapter 02 · The Coach",
     title: "What a Nutrition Coach Does",
     body: [
-      "A nutrition coach assesses a client's current habits and needs, then designs meal plans and recommendations that bridge where they are with where they want to be.",
+      "A Nutrition Coach assesses a client's current habits and needs, then designs meal plans and recommendations that bridge where they are with where they want to be.",
       "Coaching is a collaborative process — together, coach and client identify outcomes, build strategies, and overcome obstacles. It changes not only behaviors, but mindsets.",
       "Coaches specialize in food-related guidance: meal planning, grocery shopping, cooking, eating behaviors, vitamins, and special diets.",
     ],
   },
+
+  // --- Chapter 3: Foundations of Good Nutrition ---
   {
     kind: "definition",
-    eyebrow: "Foundations",
+    imageIndex: 5,
+    eyebrow: "Chapter 03 · Foundations",
     title: "What Is Good Nutrition?",
     body: [
       "Good nutrition means giving your body the right balance of nutrients it needs to function properly — proteins, carbohydrates, fats, vitamins, minerals, and water.",
@@ -92,7 +105,8 @@ export const slides: Slide[] = [
   },
   {
     kind: "bullets",
-    eyebrow: "Why It Matters",
+    imageIndex: 6,
+    eyebrow: "Chapter 03 · Why It Matters",
     title: "Why Nutrition Is Important",
     lead: "Good nutrition helps you to:",
     bullets: [
@@ -105,7 +119,19 @@ export const slides: Slide[] = [
     quote: "What we eat today affects how we feel tomorrow.",
   },
   {
+    kind: "dangers",
+    imageIndex: 9,
+    eyebrow: "Chapter 03 · The Risks",
+    title: "The Dangers of Poor Nutrition",
+    lead: "Poor eating habits can lead to:",
+    items: ["Weight gain or obesity", "Low energy", "High blood pressure", "Diabetes", "Heart disease"],
+    quote: "Many of these conditions can be prevented with better food choices.",
+  },
+
+  // --- Chapter 4: Key Nutrients & A Balanced Diet ---
+  {
     kind: "nutrients",
+    imageIndex: 7,
     title: "Key Nutrients Your Body Needs",
     items: [
       { icon: "🌾", name: "Carbohydrates", desc: "Your primary source of energy", color: "orange" },
@@ -117,27 +143,80 @@ export const slides: Slide[] = [
   },
   {
     kind: "balanced",
+    imageIndex: 8,
     title: "What Is a Balanced Diet?",
     lead: "A balanced diet includes a variety of foods:",
     items: ["Fruits & vegetables", "Whole grains", "Lean proteins", "Healthy fats"],
     tag: "The goal is balance — not perfection.",
   },
-  {
-    kind: "dangers",
-    title: "The Dangers of Poor Nutrition",
-    lead: "Poor eating habits can lead to:",
-    items: ["Weight gain or obesity", "Low energy", "High blood pressure", "Diabetes", "Heart disease"],
-    quote: "Many of these conditions can be prevented with better food choices.",
-  },
+
+  // --- Chapter 5: Reading Nutrition Labels ---
   {
     kind: "label",
+    imageIndex: 10,
     title: "Understanding Nutrition Labels",
     lead: "Nutrition labels help us understand what's in our food. Key things to check:",
     items: ["Serving size", "Calories", "Sugars — especially added sugars", "Fat and sodium", "% Daily Value"],
     note: "This helps you make smarter choices.",
   },
   {
+    kind: "compare-foods",
+    imageIndex: 17,
+    title: "When Comparing Two Foods, Look At:",
+    lead: "Six quick checks that separate a great choice from a mediocre one.",
+    items: [
+      { n: 1, name: "Fiber", rule: "Higher = better", desc: "Slows digestion, stabilizes blood sugar, increases fullness." },
+      { n: 2, name: "Added Sugar", rule: "Lower = better", desc: "Aim for under 10% DV per serving." },
+      { n: 3, name: "Sodium", rule: "Lower = better", desc: "Especially important for packaged foods." },
+      { n: 4, name: "Protein", rule: "Higher = better", desc: "Supports fullness and blood-sugar control." },
+      { n: 5, name: "Calories", rule: "Context matters", desc: "Compare snacks vs. meals." },
+      { n: 6, name: "Ingredients", rule: "Shorter = better", desc: "Look for whole foods at the top." },
+    ],
+  },
+  {
+    kind: "thresholds",
+    imageIndex: 18,
+    title: "How to Evaluate Nutrition Labels Quickly",
+    high: [
+      { label: "Fiber", verdict: "good" },
+      { label: "Protein", verdict: "good" },
+      { label: "Vitamins / Minerals", verdict: "good" },
+      { label: "Sodium (High sodium is not ideal)", verdict: "limit" },
+      { label: "Added Sugar (High sugar is not ideal)", verdict: "limit" },
+      { label: "Saturated Fat (High saturated fat is not ideal)", verdict: "limit" },
+    ],
+    low: [
+      { label: "Sodium", verdict: "good" },
+      { label: "Added Sugar", verdict: "good" },
+      { label: "Saturated Fat", verdict: "good" },
+      { label: "Fiber (Low fiber is not ideal)", verdict: "bad" },
+      { label: "Protein (Low protein is not filling)", verdict: "bad" },
+    ],
+  },
+  {
+    kind: "look-for",
+    imageIndex: 20,
+    title: "Key Indicators for Smart Shopping",
+    good: [
+      "Fiber: 10%+ is good, 20%+ is excellent",
+      "Added sugar: under 10% per serving",
+      "Sodium: under 10% per serving",
+      "Protein: 10–20% is solid",
+      "Ingredients: short list, whole foods first",
+    ],
+    red: [
+      "Added sugar in the first 3 ingredients",
+      "Sodium above 20% per serving",
+      "Trans fats",
+      "Long ingredient lists with chemicals",
+      '"Fruit-flavored" instead of real fruit',
+    ],
+  },
+
+  // --- Chapter 6: %DV — Daily Values Decoded ---
+  {
     kind: "dv-table",
+    imageIndex: 11,
     title: "How % Daily Value Is Calculated",
     intro: "Every %DV is based on a standard reference set by the FDA, based on a 2,000-calorie diet.",
     formula: "%DV = (Amount in food ÷ Daily Value reference) × 100",
@@ -155,6 +234,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "calc-card",
+    imageIndex: 12,
     title: "Nutrition Label Calculation",
     food: [
       { label: "Carbs", value: "32 g" },
@@ -173,7 +253,8 @@ export const slides: Slide[] = [
   },
   {
     kind: "calc-pair",
-    title: "Nutrition Label Calculation",
+    imageIndex: 13,
+    title: "Nutrition Label Calculations: Part 1",
     pairs: [
       { name: "Carbs", dv: "275 g", calc: "32 ÷ 275 × 100 = 11.6%", result: "12% DV" },
       { name: "Fiber", dv: "28 g", calc: "3 ÷ 28 × 100 = 10.7%", result: "11% DV" },
@@ -181,7 +262,8 @@ export const slides: Slide[] = [
   },
   {
     kind: "calc-pair",
-    title: "Nutrition Label Calculations — Cont'd",
+    imageIndex: 14,
+    title: "Nutrition Label Calculations: Part 2",
     pairs: [
       { name: "Added Sugar", dv: "50 g", calc: "12 ÷ 50 × 100", result: "24% DV" },
       { name: "Sodium", dv: "2,300 mg", calc: "450 ÷ 2,300 × 100 = 19.5%", result: "20% DV" },
@@ -189,7 +271,8 @@ export const slides: Slide[] = [
   },
   {
     kind: "calc-pair",
-    title: "Nutrition Label Calculations — Cont'd",
+    imageIndex: 15,
+    title: "Nutrition Label Calculations: Part 3",
     pairs: [
       { name: "Protein", dv: "50 g", calc: "4 ÷ 50 × 100", result: "8% DV" },
       { name: "Total Fat", dv: "78 g", calc: "7 ÷ 78 × 100 = 8.97%", result: "9% DV" },
@@ -199,7 +282,8 @@ export const slides: Slide[] = [
   },
   {
     kind: "macro-break",
-    title: "Nutrition Fact Breakdown — Macros",
+    imageIndex: 16,
+    title: "Nutrition Facts Breakdown — Macros",
     macros: [
       { name: "Carbs", g: "28 g" },
       { name: "Protein", g: "6 g" },
@@ -223,77 +307,9 @@ export const slides: Slide[] = [
     foot: "Total Calories: 172 → 170 calories. This is exactly how nutrition labels calculate %DV.",
   },
   {
-    kind: "compare-foods",
-    title: "When Comparing Two Foods, Look At:",
-    lead: "Six quick checks that separate a great choice from a mediocre one.",
-    items: [
-      { n: 1, name: "Fiber", rule: "Higher = better", desc: "Slows digestion, stabilizes blood sugar, increases fullness." },
-      { n: 2, name: "Added Sugar", rule: "Lower = better", desc: "Aim for under 10% DV per serving." },
-      { n: 3, name: "Sodium", rule: "Lower = better", desc: "Especially important for packaged foods." },
-      { n: 4, name: "Protein", rule: "Higher = better", desc: "Supports fullness and blood-sugar control." },
-      { n: 5, name: "Calories", rule: "Context matters", desc: "Compare snacks vs. meals." },
-      { n: 6, name: "Ingredients", rule: "Shorter = better", desc: "Look for whole foods at the top." },
-    ],
-  },
-  {
-    kind: "thresholds",
-    title: "How to Evaluate Nutrition Labels Quickly",
-    high: [
-      { label: "Fiber", verdict: "good" },
-      { label: "Protein", verdict: "good" },
-      { label: "Vitamins / Minerals", verdict: "good" },
-      { label: "Sodium", verdict: "limit" },
-      { label: "Added Sugar", verdict: "limit" },
-      { label: "Saturated Fat", verdict: "limit" },
-    ],
-    low: [
-      { label: "Sodium", verdict: "good" },
-      { label: "Added Sugar", verdict: "good" },
-      { label: "Saturated Fat", verdict: "good" },
-      { label: "Calories", verdict: "good" },
-      { label: "Carbs (if needed)", verdict: "good" },
-    ],
-  },
-  {
-    kind: "thresholds",
-    title: "Important Label Information",
-    high: [
-      { label: "Fiber", verdict: "good" },
-      { label: "Protein", verdict: "good" },
-      { label: "Vitamins / Minerals", verdict: "good" },
-      { label: "Sodium", verdict: "limit" },
-      { label: "Added Sugar", verdict: "limit" },
-      { label: "Saturated Fat", verdict: "limit" },
-    ],
-    low: [
-      { label: "Sodium", verdict: "good" },
-      { label: "Added Sugar", verdict: "good" },
-      { label: "Saturated Fat", verdict: "good" },
-      { label: "Fiber (low = not ideal)", verdict: "bad" },
-      { label: "Protein (low = not filling)", verdict: "bad" },
-    ],
-  },
-  {
-    kind: "look-for",
-    title: "Important Label Reading — Cont'd",
-    good: [
-      "Fiber: 10%+ is good, 20%+ is excellent",
-      "Added sugar: under 10% per serving",
-      "Sodium: under 10% per serving",
-      "Protein: 10–20% is solid",
-      "Ingredients: short list, whole foods first",
-    ],
-    red: [
-      "Added sugar in the first 3 ingredients",
-      "Sodium above 20% per serving",
-      "Trans fats",
-      "Long ingredient lists with chemicals",
-      '"Fruit-flavored" instead of real fruit',
-    ],
-  },
-  {
     kind: "formula",
-    title: "Simple Formula For Nutrition",
+    imageIndex: 21,
+    title: "Simple Formula for Nutrition Calculations",
     lead: "When calculating nutrition for meals, use this simple formula.",
     formula: "(Nutrient per 100 g ÷ 100) × grams consumed",
     example: {
@@ -304,8 +320,11 @@ export const slides: Slide[] = [
       result: "44.5 calories",
     },
   },
+
+  // --- Chapter 7: Better vs Less-Ideal Choices ---
   {
     kind: "bullets",
+    imageIndex: 22,
     eyebrow: "Healthy Eating",
     title: "Healthy Eating Tips",
     lead: "Here are simple ways to improve your diet:",
@@ -319,6 +338,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "choices",
+    imageIndex: 23,
     title: "Better Carb Choices",
     eyebrow: "Carbohydrates",
     tone: "better",
@@ -331,6 +351,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "choices",
+    imageIndex: 24,
     title: "Less-Ideal Carb Choices",
     eyebrow: "Carbohydrates",
     tone: "less",
@@ -343,8 +364,9 @@ export const slides: Slide[] = [
   },
   {
     kind: "choices",
+    imageIndex: 25,
     title: "Better Fat Choices",
-    eyebrow: "Fats — Heart-healthy",
+    eyebrow: "Fats — Heart-Healthy",
     tone: "better",
     items: [
       "Avocado", "Olive oil", "Avocado oil",
@@ -356,6 +378,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "choices",
+    imageIndex: 26,
     title: "Less-Ideal Fat Choices",
     eyebrow: "Fats — Inflammatory",
     tone: "less",
@@ -369,8 +392,9 @@ export const slides: Slide[] = [
   },
   {
     kind: "choices",
+    imageIndex: 27,
     title: "Better Protein Choices",
-    eyebrow: "Protein — Lean & Nutrient-dense",
+    eyebrow: "Protein — Lean & Nutrient-Dense",
     tone: "better",
     items: [
       "Chicken breast", "Turkey", "Salmon", "Tuna", "Sardines",
@@ -381,6 +405,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "choices",
+    imageIndex: 28,
     title: "Less-Ideal Protein Choices",
     eyebrow: "Protein — Processed",
     tone: "less",
@@ -393,6 +418,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "veg-groups",
+    imageIndex: 29,
     title: "Better Vegetable Choices",
     nonStarchy: [
       "Broccoli", "Spinach", "Kale", "Swiss chard", "Arugula", "Romaine",
@@ -404,8 +430,9 @@ export const slides: Slide[] = [
   },
   {
     kind: "choices",
+    imageIndex: 30,
     title: "Less-Ideal Vegetable Choices",
-    eyebrow: "Usually due to preparation",
+    eyebrow: "Usually Due to Preparation",
     tone: "less",
     items: [
       "Vegetables fried in oil",
@@ -418,20 +445,19 @@ export const slides: Slide[] = [
   },
   {
     kind: "small-changes",
+    imageIndex: 31,
     title: "Small Changes Matter",
     lead: "You don't have to change everything overnight. Start small:",
     items: ["Swap soda for water", "Add more vegetables", "Reduce processed foods"],
     quote: "Small changes lead to big results.",
   },
-  {
-    kind: "responsibility",
-    title: "Your Health Is Your Responsibility",
-    body: "Taking care of your body and mind helps you feel good, stay strong, and live your best life. At the end of the day, your health is in your hands — the choices you make daily will determine your future health.",
-  },
+
+  // --- Chapter 8: Calorie Reference Guide ---
   {
     kind: "cal-list",
+    imageIndex: 33,
     title: "Fruit Calories",
-    eyebrow: "Reference Guide",
+    eyebrow: "Low to Moderate Volume",
     groups: [
       {
         name: "Low-calorie (under 60)", tone: "low",
@@ -456,6 +482,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "cal-list",
+    imageIndex: 34,
     title: "Fruit Calories",
     eyebrow: "Higher Calorie & Dried",
     groups: [
@@ -478,6 +505,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "cal-list",
+    imageIndex: 35,
     title: "Vegetable Calories",
     eyebrow: "Volume Eating",
     groups: [
@@ -505,6 +533,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "cal-list",
+    imageIndex: 36,
     title: "Vegetable Calories",
     eyebrow: "Starchier & Prepared",
     groups: [
@@ -531,6 +560,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "cal-list",
+    imageIndex: 37,
     title: "Protein Calories",
     eyebrow: "Animal Proteins",
     groups: [
@@ -555,6 +585,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "cal-list",
+    imageIndex: 38,
     title: "Protein Calories",
     eyebrow: "Fish, Seafood & Dairy",
     groups: [
@@ -579,6 +610,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "cal-list",
+    imageIndex: 39,
     title: "Protein Calories",
     eyebrow: "Plant-Based & Powders",
     groups: [
@@ -610,6 +642,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "cal-list",
+    imageIndex: 40,
     title: "Carbohydrate Calories",
     eyebrow: "Grains, Starches & Starchy Veg",
     groups: [
@@ -635,6 +668,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "cal-list",
+    imageIndex: 41,
     title: "Carbohydrate Calories",
     eyebrow: "Legumes & Fruits",
     groups: [
@@ -658,6 +692,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "cal-list",
+    imageIndex: 42,
     title: "Carbohydrate Calories",
     eyebrow: "Sweets & Drinks",
     groups: [
@@ -680,6 +715,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "cal-list",
+    imageIndex: 43,
     title: "Fat Calories",
     eyebrow: "Oils, Nuts & Butters",
     groups: [
@@ -703,6 +739,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "cal-list",
+    imageIndex: 44,
     title: "Fat Calories",
     eyebrow: "Seeds, Avocado & Fatty Meats",
     groups: [
@@ -729,8 +766,11 @@ export const slides: Slide[] = [
       },
     ],
   },
+
+  // --- Chapter 8: Micronutrients & Vitamins ---
   {
     kind: "micros-intro",
+    imageIndex: 45,
     title: "What Are Micronutrients?",
     body: "Micronutrients are the vitamins and minerals your body needs in small amounts for energy, immunity, metabolism, and overall health. They fall into four groups: water-soluble vitamins, fat-soluble vitamins, macro-minerals, and trace minerals.",
     supports: [
@@ -744,6 +784,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "vitamins-split",
+    imageIndex: 46,
     title: "Water- and Fat-Soluble Vitamins",
     water: {
       name: "Water-soluble",
@@ -762,6 +803,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "vitamins-split",
+    imageIndex: 47,
     title: "Macro and Trace Minerals",
     water: {
       name: "Macro-minerals",
@@ -776,6 +818,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "vitamin-cards",
+    imageIndex: 48,
     title: "Vitamins for Ongoing Health",
     lead: "Stored in the body but still important to consume regularly.",
     items: [
@@ -795,6 +838,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "vitamin-cards",
+    imageIndex: 49,
     title: "Essential Daily Vitamins",
     items: [
       { name: "Vitamin C", desc: "Immunity, skin health & iron absorption.", sources: "Citrus, berries, peppers, broccoli." },
@@ -806,8 +850,11 @@ export const slides: Slide[] = [
       { name: "B12", desc: "Supports nerve function & energy production.", sources: "Meat, fish, eggs, dairy." },
     ],
   },
+
+  // --- Chapter 9: Macros, Good Foods & The Plate ---
   {
     kind: "macros-overview",
+    imageIndex: 50,
     title: "Macronutrients",
     items: [
       { n: "01", name: "Protein", desc: "Supports muscle repair, metabolism, fullness, and immune function.", examples: "Chicken, turkey, fish, eggs, Greek yogurt, tofu, beans, lentils.", color: "green" },
@@ -817,6 +864,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "choices",
+    imageIndex: 51,
     title: "Good Carbohydrates",
     eyebrow: "Fiber · Vitamins · Stable Blood Sugar",
     tone: "better",
@@ -828,6 +876,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "choices",
+    imageIndex: 52,
     title: "Good Protein",
     eyebrow: "Lean & Filling — Fullness · Muscle · Metabolism",
     tone: "better",
@@ -840,6 +889,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "choices",
+    imageIndex: 53,
     title: "Good Fats",
     eyebrow: "Heart-Healthy — Hormones · Brain · Satiety",
     tone: "better",
@@ -853,6 +903,7 @@ export const slides: Slide[] = [
   },
   {
     kind: "balanced-plate",
+    imageIndex: 54,
     title: "A Balanced Plate",
     lead: "A clear, everyday plate looks like this:",
     portions: [
@@ -868,8 +919,17 @@ export const slides: Slide[] = [
       { label: "Veggies", portion: "2 cupped hands" },
     ],
   },
+
+  // --- Chapter 10: Conclusion & Responsibility ---
+  {
+    kind: "responsibility",
+    imageIndex: 32,
+    title: "Your Health Is Your Responsibility",
+    body: "Taking care of your body and mind helps you feel good, stay strong, and live your best life. At the end of the day, your health is in your hands — the choices you make daily will determine your future health.",
+  },
   {
     kind: "conclusion",
+    imageIndex: 55,
     title: "Conclusion",
     body: "Good nutrition is not about restriction — it's about making better choices, understanding your food, and taking control of your health.",
     quote: "Remember — your body deserves the best.",

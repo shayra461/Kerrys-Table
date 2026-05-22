@@ -120,7 +120,7 @@ export function Deck() {
       {/* Top bar: logo + counter + grid toggle */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex items-center justify-between px-6 py-5 md:px-10">
         <div className="pointer-events-auto flex items-center">
-          <img src={logo} alt="Kerry's Nutrition" className="size-20 md:size-24 lg:size-28 object-contain drop-shadow-lg" />
+          <img src={logo} alt="Kerry's Nutrition" className="size-24 md:size-30 lg:size-36 object-contain drop-shadow-lg" />
         </div>
         <div className="pointer-events-auto flex items-center gap-3">
           <button
@@ -238,7 +238,7 @@ export function Deck() {
             <div className="flex-1 overflow-y-auto px-6 pb-8 md:px-10 scrollbar-hide">
               <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
                 {slides.map((s, i) => {
-                  const img = imageFor(i);
+                  const img = imageFor(s.imageIndex);
                   const label =
                     s.kind === "cover"
                       ? "Cover"

@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playball&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import "tw-animate-css";
 @import "tailwindcss" source(none);
 @source "../src";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -35,46 +36,45 @@
   --color-green: var(--brand-green);
   --color-green-soft: var(--brand-green-soft);
   --color-cream: var(--brand-cream);
-  --font-display: "AvantGardeCTT", "Avant Garde", "Century Gothic", ui-sans-serif, system-ui, sans-serif;
-}
-
-@font-face {
-  font-family: "AvantGardeCTT";
-  src: local("Avant Garde"), local("ITC Avant Garde Gothic"), local("Century Gothic");
-  font-display: swap;
+  --color-gold: var(--brand-gold);
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-script: "Playball", cursive;
+  --font-display: var(--font-serif);
 }
 
 :root {
-  --radius: 1rem;
+  --radius: 1.25rem;
 
-  --brand-orange: oklch(0.71 0.19 47);          /* #FF6600 */
-  --brand-orange-soft: oklch(0.94 0.05 60);
-  --brand-green: oklch(0.51 0.11 145);          /* #377737 */
-  --brand-green-soft: oklch(0.95 0.04 140);
-  --brand-cream: oklch(0.985 0.012 85);
+  --brand-orange: #D96B27;          /* Sunset Terracotta Orange */
+  --brand-orange-soft: #FCF4ED;
+  --brand-green: #1C4A28;           /* Elegant Forest Green */
+  --brand-green-soft: #F2F7F3;
+  --brand-cream: #FCFAF2;           /* Warm Luxury Cream */
+  --brand-gold: #C5A85A;            /* Flyer Gold */
 
-  --background: oklch(0.985 0.012 85);
-  --foreground: oklch(0.22 0.03 150);
+  --background: #FCFAF2;
+  --foreground: #1E2E22;            /* Dark Slate Green */
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.03 150);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.03 150);
+  --card: #FFFFFF;
+  --card-foreground: #1E2E22;
+  --popover: #FFFFFF;
+  --popover-foreground: #1E2E22;
 
   --primary: var(--brand-green);
-  --primary-foreground: oklch(0.99 0.01 90);
+  --primary-foreground: #FCFAF2;
   --secondary: var(--brand-orange);
-  --secondary-foreground: oklch(0.99 0.01 90);
+  --secondary-foreground: #FCFAF2;
 
-  --muted: oklch(0.95 0.015 90);
-  --muted-foreground: oklch(0.45 0.03 150);
-  --accent: oklch(0.94 0.05 60);
-  --accent-foreground: oklch(0.30 0.05 50);
-  --destructive: oklch(0.62 0.22 25);
-  --destructive-foreground: oklch(0.99 0.01 90);
-  --border: oklch(0.92 0.02 100 / 0.7);
-  --input: oklch(0.92 0.02 100);
-  --ring: var(--brand-orange);
+  --muted: #F2F4F2;
+  --muted-foreground: #5C6F60;
+  --accent: #FCF4ED;
+  --accent-foreground: #D96B27;
+  --destructive: #A93822;
+  --destructive-foreground: #FCFAF2;
+  --border: rgba(28, 74, 40, 0.08);
+  --input: rgba(28, 74, 40, 0.05);
+  --ring: var(--brand-green);
 }
 
 @layer base {
@@ -83,9 +83,14 @@
   body {
     background: var(--color-background);
     color: var(--color-foreground);
-    font-family: var(--font-display);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     overflow: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
   }
 }
 
@@ -93,58 +98,88 @@
 .deck-bg {
   position: fixed; inset: 0; z-index: 0; overflow: hidden;
   background:
-    radial-gradient(1200px 800px at 8% 12%, color-mix(in oklab, var(--brand-orange) 18%, transparent), transparent 60%),
-    radial-gradient(1000px 700px at 92% 88%, color-mix(in oklab, var(--brand-green) 16%, transparent), transparent 60%),
-    radial-gradient(900px 700px at 60% 40%, color-mix(in oklab, var(--brand-cream) 90%, transparent), transparent 70%),
-    linear-gradient(180deg, #fffaf3 0%, #f6fbf4 100%);
+    radial-gradient(1300px 900px at 5% 10%, color-mix(in oklab, var(--brand-orange) 8%, transparent), transparent 60%),
+    radial-gradient(1100px 800px at 95% 90%, color-mix(in oklab, var(--brand-green) 12%, transparent), transparent 60%),
+    radial-gradient(900px 700px at 50% 50%, color-mix(in oklab, var(--brand-cream) 95%, transparent), transparent 75%),
+    linear-gradient(180deg, #FDFCF7 0%, #F5F8F4 100%);
 }
 .deck-grain::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  background-image: radial-gradient(rgba(55,119,55,0.06) 1px, transparent 1px);
-  background-size: 22px 22px;
-  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  background-image: radial-gradient(rgba(28,74,40,0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse at center, black 50%, transparent 90%);
 }
 
 .glass {
-  background: color-mix(in oklab, white 65%, transparent);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid color-mix(in oklab, white 70%, transparent);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(20px) saturate(165%);
+  -webkit-backdrop-filter: blur(20px) saturate(165%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  outline: 1px solid rgba(197, 168, 90, 0.16); /* Subtle gold trace */
   box-shadow:
-    0 1px 0 rgba(255,255,255,0.6) inset,
-    0 20px 60px -20px rgba(55,119,55,0.18),
-    0 8px 24px -12px rgba(255,102,0,0.12);
+    0 1px 0 rgba(255,255,255,0.8) inset,
+    0 24px 48px -16px rgba(28, 74, 40, 0.11),
+    0 8px 20px -10px rgba(217, 107, 39, 0.06);
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+.glass:hover {
+  outline-color: rgba(197, 168, 90, 0.3);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.8) inset,
+    0 28px 56px -12px rgba(28, 74, 40, 0.15),
+    0 10px 24px -8px rgba(217, 107, 39, 0.08);
+}
+
 .glass-dark {
-  background: color-mix(in oklab, var(--brand-green) 92%, transparent);
-  color: #fff;
+  background: linear-gradient(135deg, #1C4A28 0%, #15381E 100%);
+  color: #FCFAF2;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  outline: 1px solid rgba(197, 168, 90, 0.25);
+  box-shadow:
+    0 12px 32px -8px rgba(0, 0, 0, 0.35),
+    0 4px 12px -6px rgba(197, 168, 90, 0.15);
 }
 
 .chip {
   display: inline-flex; align-items: center; gap: 0.5rem;
-  padding: 0.4rem 0.85rem; border-radius: 999px;
-  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
-  background: color-mix(in oklab, var(--brand-orange) 12%, white);
+  padding: 0.45rem 1rem; border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+  background: color-mix(in oklab, var(--brand-orange) 10%, #FFFFFF);
   color: var(--brand-orange);
-  border: 1px solid color-mix(in oklab, var(--brand-orange) 25%, transparent);
+  border: 1px solid color-mix(in oklab, var(--brand-orange) 20%, transparent);
 }
 .chip-green {
-  background: color-mix(in oklab, var(--brand-green) 10%, white);
+  background: color-mix(in oklab, var(--brand-green) 8%, #FFFFFF);
   color: var(--brand-green);
-  border-color: color-mix(in oklab, var(--brand-green) 25%, transparent);
+  border-color: color-mix(in oklab, var(--brand-green) 18%, transparent);
 }
 
 .headline {
+  font-family: var(--font-serif);
   font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.08;
-  /* padding-bottom prevents descenders (g, y, p) from being clipped by background-clip: text */
-  padding-bottom: 0.14em;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  padding-bottom: 0.08em;
   display: inline-block;
   max-width: 100%;
-  background: linear-gradient(180deg, #1f3a1f 0%, #2e5a2e 70%, #FF6600 130%);
+  background: linear-gradient(180deg, #12301B 0%, #1C4A28 65%, #C5A85A 120%);
   -webkit-background-clip: text; background-clip: text;
   color: transparent;
+}
+
+.headline-orange {
+  background: linear-gradient(180deg, #9C4511 0%, #D96B27 70%, #C5A85A 130%);
+  -webkit-background-clip: text; background-clip: text;
+}
+
+.script-accent {
+  font-family: var(--font-script);
+  font-weight: 400;
+  color: var(--brand-orange);
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .fruit {
@@ -173,3 +208,20 @@
 
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { scrollbar-width: none; }
+
+/* Custom Luxury Gold Accents */
+.luxury-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--brand-gold) 50%, transparent 100%);
+  opacity: 0.6;
+}
+
+.luxury-bullet-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: var(--brand-gold);
+  box-shadow: 0 0 8px var(--brand-gold);
+}
+
