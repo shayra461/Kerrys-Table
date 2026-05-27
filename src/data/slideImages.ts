@@ -1,3 +1,5 @@
+import coachPortrait from "../assets/kerry-ann-walker.jpeg";
+
 // Premium curated Unsplash photo IDs that map uniquely to slide topics.
 // Returned as full URLs at a sensible size with absolutely no duplicates.
 
@@ -25,7 +27,7 @@ const IMAGES: Record<number, string> = {
   12: U("photo-1554224155-6726b3ff858f"), // Nutrition Label Calculation (worked example with stylish clipboard)
   13: U("photo-1434030216411-0b793f4b4173"), // Calc pair 1 (writing calculations/assessing nutrition details)
   14: U("photo-1454165804606-c3d57bc86b40"), // Calc pair 2 (analyzing food values sheets)
-  15: U("photo-1551836022-d5d88e9218df"), // Calc pair 3 (explaining calculations professionally)
+  15: coachPortrait, // Coach Portrait (Kerry-Ann Walker instead of consulting template)
   16: U("photo-1511690656952-34342bb7c2f2"), // Macro breakdown (top-down view of partitioned clean meal prep)
   17: U("photo-1490474418585-ba9bad8fd0ea"), // Comparing foods (two contrasting breakfast bowls)
   18: U("photo-1542838132-92c53300491e"), // Evaluating nutrition labels (scanning packaging)
