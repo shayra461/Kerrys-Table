@@ -226,15 +226,21 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                   className="relative h-full w-full overflow-hidden rounded-[2rem] border-2 border-gold/20 shadow-2xl"
                 >
                   <img src={coachPortrait} alt={slide.name} className="absolute inset-0 size-full object-cover object-top transition-transform duration-500 hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-green/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-3 left-3 right-3 rounded-xl glass p-3 px-4.5 border border-white/40 shadow-xl">
-                    <div className="text-xl font-serif font-bold text-green tracking-tight">{slide.name}</div>
-                    <div className="text-[10px] tracking-wider uppercase font-semibold text-orange mt-0.5">{slide.role}</div>
-                  </div>
                 </motion.div>
               </motion.div>
               <div className="flex flex-col justify-center">
                 <Title>{slide.title}</Title>
+                
+                {/* Premium, clean name and role typography block */}
+                <div className="mt-3 mb-2">
+                  <div className="text-3xl md:text-4xl font-serif font-bold text-green tracking-tight">
+                    {slide.name}
+                  </div>
+                  <div className="text-sm font-semibold tracking-wider uppercase text-orange mt-1">
+                    {slide.role}
+                  </div>
+                </div>
+
                 <div className="mt-4 flex flex-wrap gap-2">
                   <span className="rounded-full bg-green-soft border border-green/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-green">Certified Nutrition Coach</span>
                   <span className="rounded-full bg-orange-soft border border-orange/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-orange">Real Food Advocate</span>
