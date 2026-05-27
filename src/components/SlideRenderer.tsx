@@ -225,11 +225,11 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                   transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                   className="relative h-full w-full overflow-hidden rounded-[2rem] border-2 border-gold/20 shadow-2xl"
                 >
-                  <img src={coachPortrait} alt={slide.name} className="absolute inset-0 size-full object-cover transition-transform duration-500 hover:scale-105" />
+                  <img src={coachPortrait} alt={slide.name} className="absolute inset-0 size-full object-cover object-top transition-transform duration-500 hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-green/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-6 left-6 right-6 rounded-2xl glass p-5 border border-white/40 shadow-xl">
-                    <div className="text-2xl font-serif font-bold text-green tracking-tight">{slide.name}</div>
-                    <div className="text-xs tracking-wider uppercase font-semibold text-orange mt-1">{slide.role}</div>
+                  <div className="absolute bottom-3 left-3 right-3 rounded-xl glass p-3 px-4.5 border border-white/40 shadow-xl">
+                    <div className="text-xl font-serif font-bold text-green tracking-tight">{slide.name}</div>
+                    <div className="text-[10px] tracking-wider uppercase font-semibold text-orange mt-0.5">{slide.role}</div>
                   </div>
                 </motion.div>
               </motion.div>
