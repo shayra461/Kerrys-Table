@@ -49,7 +49,7 @@ const IMAGES: Record<number, string> = {
   // Ch 5: Calorie Reference Guide
   33: U("photo-1488477181946-6428a0291777"), // Fruit Calories Low (strawberries, blueberries, berries mix)
   34: U("photo-1610832958506-aa56368176cf"), // Fruit Calories Moderate (sliced oranges, kiwis, mangoes)
-  35: U("photo-1617040619263-41c5a9ca7521"), // Vegetable Calories Low (cucumber, broccoli, peppers - strictly vegetables, no fruits)
+  35: U("photo-1592417817098"), // Vegetable Calories Low (cucumber, broccoli, peppers - strictly vegetables, no fruits)
   36: U("photo-1597362925123-77861d3fbac7"), // Vegetable Calories Starchy (celery, zucchini, carrots, potatoes)
   37: U("photo-1604503468506-a8da13d82791"), // Protein Calories Lean (lean grilled chicken breast sliced)
   38: U("photo-1551024601-bec78aea704b"), // Protein Calories Fish/Dairy (greek yogurt bowl with honey and almonds)
