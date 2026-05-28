@@ -365,10 +365,16 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                         }`}
                       >
                         <div>
-                          <div className={`flex size-11 items-center justify-center rounded-xl text-3xl shadow-sm ${
-                            isGreen ? "bg-green/8 text-green" : "bg-orange/8 text-orange"
-                          }`}>
-                            {it.icon}
+                          <div className="flex size-14 items-center justify-center rounded-2xl shadow-sm overflow-hidden relative border border-border/10 bg-white">
+                            {it.icon.startsWith("http") || it.icon.includes("/") || it.icon.length > 10 ? (
+                              <img 
+                                src={it.icon.startsWith("http") ? it.icon : `https://images.unsplash.com/${it.icon}?w=150&q=85&auto=format&fit=crop`} 
+                                alt={it.name} 
+                                className="absolute inset-0 size-full object-cover"
+                              />
+                            ) : (
+                              <span className="text-2xl">{it.icon}</span>
+                            )}
                           </div>
                           <div className={`mt-4 text-lg font-bold font-serif ${isGreen ? "text-green" : "text-orange"}`}>
                             {it.name}
