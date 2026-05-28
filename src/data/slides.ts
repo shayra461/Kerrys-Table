@@ -134,11 +134,11 @@ export const slides: Slide[] = [
     imageIndex: 7,
     title: "Key Nutrients Your Body Needs",
     items: [
-      { icon: "photo-1574316071802-0d684efa7bf5", name: "Carbohydrates", desc: "Your primary source of energy", color: "orange" },
+      { icon: "photo-1551028150-64b9f398f678", name: "Carbohydrates", desc: "Your primary source of energy", color: "orange" },
       { icon: "photo-1467003909585-2f8a72700288", name: "Protein", desc: "Muscle repair and growth", color: "green" },
       { icon: "photo-1523049673857-eb18f1d7b578", name: "Healthy Fats", desc: "Brain & hormone function", color: "orange" },
       { icon: "photo-1576045057995-568f588f82fb", name: "Vitamins & Minerals", desc: "Overall health & immunity", color: "green" },
-      { icon: "photo-1548839140-29a888b159bc", name: "Water", desc: "Hydration & digestion", color: "orange" },
+      { icon: "photo-1548839140-29a749e1cf4d", name: "Water", desc: "Hydration & digestion", color: "orange" },
     ],
   },
   {

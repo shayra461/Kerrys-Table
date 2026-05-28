@@ -346,50 +346,44 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
       case "nutrients":
         return (
           <SlideShell eyebrow="Building Blocks">
-            <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] items-center max-w-7xl">
-              <div>
-                <Title>{slide.title}</Title>
-                <div className="luxury-divider my-6 max-w-xl" />
-                <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-                  {slide.items.map((it, i) => {
-                    const isGreen = it.color === "green";
-                    return (
-                      <motion.div
-                        key={i}
-                        {...stagger(i)}
-                        whileHover={{ y: -6, scale: 1.02 }}
-                        className={`glass flex flex-col justify-between rounded-3xl p-5 border transition-all duration-300 ${
-                          isGreen 
-                            ? "hover:border-green/30 hover:bg-brand-green-soft/50 ring-1 ring-green/10" 
-                            : "hover:border-orange/30 hover:bg-brand-orange-soft/50 ring-1 ring-orange/10"
-                        }`}
-                      >
+            <div className="max-w-7xl w-full mx-auto pt-2">
+              <Title>{slide.title}</Title>
+              <div className="luxury-divider my-6 max-w-xl" />
+              <div className="mt-8 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
+                {slide.items.map((it, i) => {
+                  const isGreen = it.color === "green";
+                  const imageUrl = `https://images.unsplash.com/${it.icon}?w=400&q=85&auto=format&fit=crop`;
+                  return (
+                    <motion.div
+                      key={i}
+                      {...stagger(i)}
+                      whileHover={{ y: -8, scale: 1.02 }}
+                      className="glass flex flex-col overflow-hidden rounded-[2rem] border border-border/80 shadow-sm transition-all duration-300 hover:shadow-xl hover:border-gold/25"
+                    >
+                      {/* Gorgeous, full-scale nutrient photo at the top */}
+                      <div className="relative h-44 w-full overflow-hidden bg-cream">
+                        <img 
+                          src={imageUrl} 
+                          alt={it.name} 
+                          className="absolute inset-0 size-full object-cover transition-transform duration-500 hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
+                      </div>
+                      
+                      {/* Text content below the photo */}
+                      <div className="p-5 flex flex-col justify-between flex-grow bg-white/40 backdrop-blur-sm border-t border-border/20">
                         <div>
-                          <div className="flex size-14 items-center justify-center rounded-2xl shadow-sm overflow-hidden relative border border-border/10 bg-white">
-                            {it.icon.startsWith("http") || it.icon.includes("/") || it.icon.length > 10 ? (
-                              <img 
-                                src={it.icon.startsWith("http") ? it.icon : `https://images.unsplash.com/${it.icon}?w=150&q=85&auto=format&fit=crop`} 
-                                alt={it.name} 
-                                className="absolute inset-0 size-full object-cover"
-                              />
-                            ) : (
-                              <span className="text-2xl">{it.icon}</span>
-                            )}
-                          </div>
-                          <div className={`mt-4 text-lg font-bold font-serif ${isGreen ? "text-green" : "text-orange"}`}>
+                          <div className={`text-lg font-serif font-bold ${isGreen ? "text-green" : "text-orange"}`}>
                             {it.name}
                           </div>
+                          <p className="mt-2 text-xs text-foreground/85 leading-relaxed font-sans font-light">
+                            {it.desc}
+                          </p>
                         </div>
-                        <p className="mt-2 text-xs text-foreground/85 leading-relaxed font-sans">
-                          {it.desc}
-                        </p>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </div>
-              <div className="flex justify-center items-center">
-                <SlideImageFrame src={heroImage} alt={slide.title} />
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
           </SlideShell>
