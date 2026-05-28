@@ -64,9 +64,16 @@ function ToneDot({ tone }: { tone: "low" | "mid" | "high" }) {
 }
 
 function Title({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  let content = children;
+  if (typeof children === "string") {
+    content = children
+      .split(" ")
+      .map(word => (word ? word.charAt(0).toUpperCase() + word.slice(1) : ""))
+      .join(" ");
+  }
   return (
     <motion.h1 {...fadeUp} className={`headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold ${className}`}>
-      {children}
+      {content}
     </motion.h1>
   );
 }
