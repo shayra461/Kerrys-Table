@@ -37,24 +37,24 @@
   --color-green-soft: var(--brand-green-soft);
   --color-cream: var(--brand-cream);
   --color-gold: var(--brand-gold);
-  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-serif: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
-  --font-script: "Playball", cursive;
+  --font-script: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-display: var(--font-serif);
 }
 
 :root {
   --radius: 1.25rem;
 
-  --brand-orange: #D96B27;          /* Sunset Terracotta Orange */
+  --brand-orange: #CA591B;          /* Sunset Terracotta Orange (Enhanced Contrast) */
   --brand-orange-soft: #FCF4ED;
-  --brand-green: #1C4A28;           /* Elegant Forest Green */
+  --brand-green: #163F21;           /* Elegant Forest Green (Enhanced Contrast) */
   --brand-green-soft: #F2F7F3;
   --brand-cream: #FCFAF2;           /* Warm Luxury Cream */
   --brand-gold: #C5A85A;            /* Flyer Gold */
 
   --background: #FCFAF2;
-  --foreground: #1E2E22;            /* Dark Slate Green */
+  --foreground: #16241A;            /* Dark Slate Green (Enhanced Contrast) */
 
   --card: #FFFFFF;
   --card-foreground: #1E2E22;
@@ -67,9 +67,9 @@
   --secondary-foreground: #FCFAF2;
 
   --muted: #F2F4F2;
-  --muted-foreground: #5C6F60;
+  --muted-foreground: #445548;      /* Higher contrast muted text */
   --accent: #FCF4ED;
-  --accent-foreground: #D96B27;
+  --accent-foreground: #CA591B;
   --destructive: #A93822;
   --destructive-foreground: #FCFAF2;
   --border: rgba(28, 74, 40, 0.08);
@@ -211,9 +211,7 @@
 
 /* Custom Luxury Gold Accents */
 .luxury-divider {
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, var(--brand-gold) 50%, transparent 100%);
-  opacity: 0.6;
+  display: none;
 }
 
 .luxury-bullet-dot {

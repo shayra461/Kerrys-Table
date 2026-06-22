@@ -1,3 +1,6 @@
+import betterCarbs from "../assets/better-carbs.jpg";
+import betterProtein from "../assets/better-protein.jpg";
+
 export type Slide = (
   | { kind: "cover"; title: string; subtitle: string; tagline: string; contact: { phone: string; email: string; site: string } }
   | { kind: "intro"; eyebrow: string; title: string; lead: string; quote: string; body: string }
@@ -19,7 +22,7 @@ export type Slide = (
   | { kind: "formula"; title: string; lead: string; formula: string; example: { food: string; per100: string; eat: string; calc: string; result: string } }
   | { kind: "choices"; title: string; eyebrow: string; tone: "better" | "less"; items: string[] }
   | { kind: "veg-groups"; title: string; nonStarchy: string[]; starchy: string[] }
-  | { kind: "small-changes"; title: string; lead: string; items: string[]; quote: string }
+  | { kind: "small-changes"; title: string; lead: string; items: { icon: string; name: string }[]; quote: string }
   | { kind: "responsibility"; title: string; body: string }
   | { kind: "cal-list"; title: string; eyebrow?: string; groups: { name: string; tone: "low" | "mid" | "high"; items: { f: string; c: string }[] }[] }
   | { kind: "micros-intro"; title: string; body: string; supports: string[] }
@@ -134,10 +137,10 @@ export const slides: Slide[] = [
     imageIndex: 7,
     title: "Key Nutrients Your Body Needs",
     items: [
-      { icon: "photo-1551028150-64b9f398f678", name: "Carbohydrates", desc: "Your primary source of energy", color: "orange" },
-      { icon: "photo-1467003909585-2f8a72700288", name: "Protein", desc: "Muscle repair and growth", color: "green" },
-      { icon: "photo-1523049673857-eb18f1d7b578", name: "Healthy Fats", desc: "Brain & hormone function", color: "orange" },
-      { icon: "photo-1576045057995-568f588f82fb", name: "Vitamins & Minerals", desc: "Overall health & immunity", color: "green" },
+      { icon: betterCarbs, name: "Carbohydrates", desc: "Your primary source of energy", color: "orange" },
+      { icon: betterProtein, name: "Protein", desc: "Muscle repair and growth", color: "green" },
+      { icon: "photo-1566393028639-d108a42c46a7", name: "Healthy Fats", desc: "Brain & hormone function", color: "orange" },
+      { icon: "photo-1584308666744-24d5c474f2ae", name: "Vitamins & Minerals", desc: "Overall health & immunity", color: "green" },
       { icon: "photo-1548839140-29a749e1cf4d", name: "Water", desc: "Hydration & digestion", color: "orange" },
     ],
   },
@@ -448,7 +451,11 @@ export const slides: Slide[] = [
     imageIndex: 31,
     title: "Small Changes Matter",
     lead: "You don't have to change everything overnight. Start small:",
-    items: ["Swap soda for water", "Add more vegetables", "Reduce processed foods"],
+    items: [
+      { icon: "photo-1548839140-29a749e1cf4d", name: "Swap soda for water" },
+      { icon: "photo-1518843875459-f738682238a6", name: "Add more vegetables" },
+      { icon: "photo-1540420773420-3366772f4999", name: "Reduce processed foods" }
+    ],
     quote: "Small changes lead to big results.",
   },
 

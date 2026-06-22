@@ -4,35 +4,26 @@ import logo from "@/assets/logo.png";
 import coachPortrait from "@/assets/kerry-ann-walker.jpeg";
 import { imageFor } from "@/data/slideImages";
 
-// Premium framed image component with glowing backgrounds, rotating borders, and floating botanical touches.
+// Premium framed image component with glowing backgrounds.
 function SlideImageFrame({ src, alt }: { src: string; alt: string }) {
+  const isDiagram = src.includes("balanced-diet") || src.includes("balanced-plate");
+
   return (
     <motion.div
       initial={{ opacity: 0, x: 30, scale: 0.95 }}
       animate={{ opacity: 1, x: 0, scale: 1 }}
       transition={{ duration: 0.8, ease: EASE }}
-      className="relative w-full h-[280px] sm:h-[320px] md:h-[380px] lg:h-[450px] xl:h-[480px] max-w-sm lg:max-w-md mx-auto z-10 shrink-0"
+      className="relative w-full h-[240px] sm:h-[280px] md:h-[320px] lg:h-[380px] xl:h-[420px] max-h-[48vh] max-w-sm lg:max-w-md mx-auto z-10 shrink-0"
     >
       {/* Soft background glow */}
       <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-green/20 via-gold/10 to-orange/15 blur-2xl opacity-75" />
-      
-      {/* Rotating luxury border */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-        className="absolute -inset-4 rounded-[2.3rem] border border-dashed border-gold/30 pointer-events-none"
-      />
-      
-      {/* Elegant Leaf/Fruit details floating around the border */}
-      <div className="absolute -top-3 -right-3 text-2xl select-none animate-bounce pointer-events-none">🌿</div>
-      <div className="absolute -bottom-3 -left-3 text-2xl select-none animate-pulse pointer-events-none">🍋</div>
 
       {/* Main Image Card */}
       <div className="relative h-full w-full overflow-hidden rounded-[2rem] border-2 border-gold/25 shadow-2xl bg-white/10 backdrop-blur-sm">
         <img 
           src={src} 
           alt={alt} 
-          className="size-full object-cover transition-transform duration-700 hover:scale-110" 
+          className={`size-full ${isDiagram ? "object-contain bg-white/75 p-4" : "object-cover"} transition-transform duration-700 hover:scale-110`} 
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-green/45 via-transparent to-transparent pointer-events-none" />
@@ -72,7 +63,7 @@ function Title({ children, className = "" }: { children: React.ReactNode; classN
       .join(" ");
   }
   return (
-    <motion.h1 {...fadeUp} className={`headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold ${className}`}>
+    <motion.h1 {...fadeUp} className={`headline text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold ${className}`}>
       {content}
     </motion.h1>
   );
@@ -93,10 +84,9 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
   const noBadge = slide.kind === "cover" || slide.kind === "coach-profile" || slide.kind === "conclusion";
 
   const content: React.ReactNode = (() => {
-    switch (slide.kind) {
-      case "cover":
+    switch (slide.kind) {      case "cover":
         return (
-          <div className="grid h-full w-full place-items-center overflow-y-auto scrollbar-hide px-6 pt-36 pb-32 md:px-12 md:pt-40 lg:pt-48">
+          <div className="grid h-full w-full place-items-center overflow-y-auto scrollbar-hide px-6 pt-24 pb-20 md:px-12 md:pt-28 lg:pt-32">
             <div className="grid w-full max-w-7xl grid-cols-1 items-center gap-12 md:grid-cols-[1.15fr_0.85fr]">
               <div className="flex flex-col justify-center">
                 <div className="flex">
@@ -105,7 +95,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 <motion.h1 {...stagger(1)} className="headline mt-6 text-7xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tight">
                   Kerry's <span className="script-accent text-orange text-6xl md:text-8xl lg:text-9xl block md:inline ml-1 font-normal">Table</span>
                 </motion.h1>
-                <motion.p {...stagger(2)} className="mt-4 text-2xl md:text-3xl text-green font-serif font-light tracking-wide italic">
+                <motion.p {...stagger(2)} className="mt-4 text-2xl md:text-3xl text-green font-serif font-medium tracking-wide italic">
                   {slide.subtitle}
                 </motion.p>
                 
@@ -118,8 +108,8 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                     Real Food <span className="text-orange">·</span> Real Results <span className="text-orange">·</span> <span className="script-accent text-orange text-2xl font-normal">Real You</span>
                   </span>
                 </motion.div>
-
-                <motion.div {...stagger(4)} className="mt-10 flex flex-wrap items-center gap-4 text-base text-foreground/80">
+ 
+                <motion.div {...stagger(4)} className="mt-10 flex flex-wrap items-center gap-4 text-base text-foreground">
                   <span className="inline-flex items-center gap-2 rounded-full glass border border-white/60 px-4 py-2 text-sm shadow-sm">
                     📞 {slide.contact.phone}
                   </span>
@@ -136,14 +126,11 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 initial={{ opacity: 0, scale: 0.92, rotate: -6 }}
                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
                 transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                className="relative mx-auto aspect-square w-full max-w-md lg:max-w-lg"
+                className="relative mx-auto aspect-square w-full max-w-sm lg:max-w-md max-h-[45vh]"
               >
-                <div className="absolute -inset-4 rounded-[2.5rem] border border-dashed border-gold/40 animate-[spin_45s_linear_infinite]" />
                 <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-orange/30 via-cream to-green/20 blur-2xl opacity-80" />
                 <motion.div
-                  animate={{ y: [0, -12, 0] }}
-                  transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative h-full w-full overflow-hidden rounded-[2.5rem] border-2 border-gold/20 shadow-2xl animate-[pulse_8s_infinite]"
+                  className="relative h-full w-full overflow-hidden rounded-[2.5rem] border-2 border-gold/20 shadow-2xl"
                 >
                   <img src={heroImage} alt="Healthy plate" className="absolute inset-0 size-full object-cover transition-transform duration-500 hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-green/50 via-transparent to-transparent" />
@@ -172,12 +159,12 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                   className="relative mt-6 rounded-2xl glass px-6 py-4.5 border-l-4 border-orange shadow-md max-w-2xl"
                 >
                   <span className="absolute -top-4 left-4 text-4xl text-gold/25 font-serif leading-none">“</span>
-                  <blockquote className="text-lg md:text-xl italic text-green font-medium font-serif leading-relaxed">
+                  <blockquote className="text-lg md:text-xl italic text-green font-semibold font-serif leading-relaxed">
                     {slide.quote}
                   </blockquote>
                 </motion.div>
 
-                <motion.p {...stagger(4)} className="mt-6 max-w-2xl text-base md:text-lg text-foreground/75 leading-relaxed font-sans font-light">
+                <motion.p {...stagger(4)} className="mt-6 max-w-2xl text-base md:text-lg text-foreground leading-relaxed font-sans font-medium">
                   {slide.body}
                 </motion.p>
               </div>
@@ -222,14 +209,11 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
 
       case "coach-profile":
         return (
-          <SlideShell eyebrow="Meet Your Coach">
-            <div className="grid items-center gap-12 md:grid-cols-[0.95fr_1.05fr] lg:gap-16 pt-4">
-              <motion.div {...stagger(1)} className="relative mx-auto aspect-[3/4] w-full max-w-sm">
-                <div className="absolute -inset-4 rounded-[2.5rem] border border-dashed border-gold/40 animate-[spin_40s_linear_infinite]" />
+          <SlideShell eyebrow="Introduction">
+            <div className="grid items-center gap-12 md:grid-cols-[0.95fr_1.05fr] lg:gap-16 pt-2">
+              <motion.div {...stagger(1)} className="relative mx-auto aspect-[3/4] w-full max-w-xs lg:max-w-sm max-h-[40vh]">
                 <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-green/30 to-orange/20 blur-2xl" />
                 <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                   className="relative h-full w-full overflow-hidden rounded-[2rem] border-2 border-gold/20 shadow-2xl"
                 >
                   <img src={coachPortrait} alt={slide.name} className="absolute inset-0 size-full object-cover object-top transition-transform duration-500 hover:scale-105" />
@@ -240,7 +224,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 
                 {/* Premium, clean name and role typography block */}
                 <div className="mt-3 mb-2">
-                  <div className="text-3xl md:text-4xl font-serif font-bold text-green tracking-tight">
+                  <div className="text-3xl md:text-4xl font-serif font-extrabold text-green tracking-tight">
                     {slide.name}
                   </div>
                   <div className="text-sm font-semibold tracking-wider uppercase text-orange mt-1">
@@ -255,13 +239,10 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 </div>
                 <div className="luxury-divider my-6" />
                 {slide.body.map((p, i) => (
-                  <motion.p key={i} {...stagger(i + 2)} className="mt-4 text-lg md:text-xl text-foreground/80 leading-relaxed font-sans font-light">
+                  <motion.p key={i} {...stagger(i + 2)} className="mt-4 text-lg md:text-xl text-foreground leading-relaxed font-sans font-medium">
                     {p}
                   </motion.p>
                 ))}
-                <motion.div {...stagger(5)} className="mt-8 script-accent text-3xl text-orange/90 font-normal">
-                  Kerry-Ann Walker
-                </motion.div>
               </div>
             </div>
           </SlideShell>
@@ -276,7 +257,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 <div className="luxury-divider my-6 max-w-xl" />
                 <div className="mt-8 grid gap-5 max-w-2xl">
                   {slide.body.map((p, i) => (
-                    <motion.p key={i} {...stagger(i + 1)} className="text-base md:text-lg lg:text-xl text-foreground/85 leading-relaxed font-sans font-light">
+                    <motion.p key={i} {...stagger(i + 1)} className="text-base md:text-lg lg:text-xl text-foreground leading-relaxed font-sans font-medium">
                       {p}
                     </motion.p>
                   ))}
@@ -286,7 +267,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                       className="relative mt-4 rounded-2xl glass px-6 py-4.5 border-l-4 border-orange shadow-md"
                     >
                       <span className="absolute -top-4 left-4 text-4xl text-gold/25 font-serif leading-none">“</span>
-                      <blockquote className="text-base md:text-lg italic text-green font-medium font-serif leading-relaxed">
+                      <blockquote className="text-base md:text-lg italic text-green font-semibold font-serif leading-relaxed">
                         {slide.quote}
                       </blockquote>
                     </motion.div>
@@ -307,7 +288,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
               <div>
                 <Title>{slide.title}</Title>
                 {slide.lead && (
-                  <motion.p {...stagger(1)} className="mt-4 text-xl text-foreground/75 font-sans">
+                  <motion.p {...stagger(1)} className="mt-4 text-xl text-foreground font-sans">
                     {slide.lead}
                   </motion.p>
                 )}
@@ -323,7 +304,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                       <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-green text-cream font-serif font-bold text-sm group-hover:bg-orange transition-all duration-300">
                         {String(i + 1).padStart(2, "0")}
                       </div>
-                      <div className="text-base md:text-lg text-foreground/85 leading-relaxed mt-0.5 group-hover:text-green transition-all duration-300 font-sans">
+                      <div className="text-base md:text-lg text-foreground leading-relaxed mt-0.5 group-hover:text-green transition-all duration-300 font-sans">
                         {b}
                       </div>
                     </motion.div>
@@ -331,8 +312,8 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 </div>
                 {slide.quote && (
                   <motion.div {...stagger(slide.bullets.length + 3)} className="mt-8 border-t border-gold/20 pt-5 max-w-2xl">
-                    <span className="script-accent text-2xl text-orange/95 font-normal block mb-1">Coach Kerry says:</span>
-                    <p className="text-lg italic text-green font-serif">"{slide.quote}"</p>
+                    <span className="text-xl text-orange font-semibold block mb-1">Coach Kerry says:</span>
+                    <p className="text-lg md:text-xl italic text-green font-serif font-semibold">"{slide.quote}"</p>
                   </motion.div>
                 )}
               </div>
@@ -352,7 +333,9 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
               <div className="mt-8 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
                 {slide.items.map((it, i) => {
                   const isGreen = it.color === "green";
-                  const imageUrl = `https://images.unsplash.com/${it.icon}?w=400&q=85&auto=format&fit=crop`;
+                  const imageUrl = it.icon.startsWith("photo-")
+                    ? `https://images.unsplash.com/${it.icon}?w=400&q=85&auto=format&fit=crop`
+                    : it.icon;
                   return (
                     <motion.div
                       key={i}
@@ -376,7 +359,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                           <div className={`text-lg font-serif font-bold ${isGreen ? "text-green" : "text-orange"}`}>
                             {it.name}
                           </div>
-                          <p className="mt-2 text-xs text-foreground/85 leading-relaxed font-sans font-light">
+                          <p className="mt-2 text-xs text-foreground leading-relaxed font-sans font-medium">
                             {it.desc}
                           </p>
                         </div>
@@ -395,20 +378,20 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
             <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] items-center max-w-7xl">
               <div>
                 <Title>{slide.title}</Title>
-                <motion.p {...stagger(1)} className="mt-4 text-xl text-foreground/75 max-w-3xl">
+                <motion.p {...stagger(1)} className="mt-4 text-xl text-foreground max-w-3xl">
                   {slide.lead}
                 </motion.p>
-                <div className="luxury-divider my-6 max-w-xl" />
-                <div className="mt-8 grid grid-cols-2 gap-5 max-w-4xl">
+                <div className="luxury-divider my-4 max-w-xl" />
+                <div className="mt-6 grid grid-cols-2 gap-4 max-w-4xl">
                   {slide.items.map((it, i) => (
                     <motion.div
                       key={i}
                       {...stagger(i + 2)}
-                      whileHover={{ scale: 1.05, y: -4 }}
-                      className="glass aspect-square rounded-3xl flex flex-col items-center justify-center text-center p-6 border border-border hover:border-gold/30 hover:bg-cream transition-all duration-300"
+                      whileHover={{ scale: 1.03, y: -2 }}
+                      className="glass rounded-2xl flex flex-col items-center justify-center text-center p-4 border border-border hover:border-gold/30 hover:bg-cream transition-all duration-300 min-h-[90px] md:min-h-[105px]"
                     >
-                      <span className="text-gold text-2xl mb-3">✦</span>
-                      <div className="text-xl font-serif font-bold text-green tracking-tight leading-snug">
+                      <span className="text-gold text-lg mb-1">✦</span>
+                      <div className="text-lg font-serif font-bold text-green tracking-tight leading-snug">
                         {it}
                       </div>
                     </motion.div>
@@ -416,10 +399,10 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 </div>
                 <motion.div 
                   {...stagger(8)} 
-                  className="mt-10 inline-flex items-center gap-3 rounded-full border border-orange/20 bg-brand-orange-soft px-6 py-3.5 text-orange shadow-sm font-sans"
+                  className="mt-6 inline-flex items-center gap-3 rounded-full border border-orange/20 bg-brand-orange-soft px-5 py-2.5 text-orange shadow-sm font-sans"
                 >
                   <span className="animate-spin-slow">✦</span>
-                  <span className="text-base font-semibold tracking-wide uppercase">{slide.tag}</span>
+                  <span className="text-sm font-semibold tracking-wide uppercase">{slide.tag}</span>
                 </motion.div>
               </div>
               <div className="flex justify-center items-center">
@@ -435,7 +418,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
             <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] items-center max-w-7xl">
               <div>
                 <Title>{slide.title}</Title>
-                <motion.p {...stagger(1)} className="mt-3 text-lg text-foreground/75 max-w-3xl">
+                <motion.p {...stagger(1)} className="mt-3 text-lg text-foreground max-w-3xl">
                   {slide.lead}
                 </motion.p>
                 <div className="luxury-divider my-4 max-w-xl" />
@@ -448,7 +431,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                       className="glass rounded-xl p-4 text-center border border-orange/10 hover:border-orange/30 hover:bg-brand-orange-soft/40 transition-all duration-300"
                     >
                       <div className="text-2xl mb-2">⚠️</div>
-                      <div className="text-sm font-serif font-bold text-green tracking-tight leading-snug">
+                      <div className="text-base md:text-lg font-serif font-bold text-green tracking-tight leading-snug">
                         {it}
                       </div>
                     </motion.div>
@@ -460,7 +443,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                     className="relative mt-6 rounded-xl glass px-6 py-4 border-l-4 border-orange shadow-md"
                   >
                     <span className="absolute -top-3 left-4 text-3xl text-gold/30 font-serif leading-none">“</span>
-                    <blockquote className="text-base italic text-green font-medium font-serif leading-relaxed">
+                    <blockquote className="text-base md:text-lg italic text-green font-semibold font-serif leading-relaxed">
                       {slide.quote}
                     </blockquote>
                   </motion.div>
@@ -479,7 +462,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
             <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] items-center max-w-7xl">
               <div>
                 <Title>{slide.title}</Title>
-                <motion.p {...stagger(1)} className="mt-3 text-lg text-foreground/75 max-w-3xl">
+                <motion.p {...stagger(1)} className="mt-3 text-lg text-foreground max-w-3xl">
                   {slide.lead}
                 </motion.p>
                 <div className="luxury-divider my-4 max-w-xl" />
@@ -492,7 +475,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                       className="glass rounded-xl p-4 hover:border-gold/30 hover:bg-cream transition-all duration-300"
                     >
                       <div className="text-orange text-[10px] tracking-widest uppercase font-bold">Check {String(i + 1).padStart(2, "0")}</div>
-                      <div className="mt-2 text-sm font-serif font-bold text-green tracking-tight leading-snug">{it}</div>
+                      <div className="mt-2 text-base md:text-lg font-serif font-bold text-green tracking-tight leading-snug">{it}</div>
                     </motion.div>
                   ))}
                 </div>
@@ -515,7 +498,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
             <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] items-center max-w-7xl">
               <div>
                 <Title>{slide.title}</Title>
-                <motion.p {...stagger(1)} className="mt-3 text-lg text-foreground/75 max-w-3xl">{slide.intro}</motion.p>
+                <motion.p {...stagger(1)} className="mt-3 text-lg text-foreground max-w-3xl">{slide.intro}</motion.p>
                 <div className="luxury-divider my-4 max-w-xl" />
                 
                 <motion.div 
@@ -541,7 +524,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                     </motion.div>
                   ))}
                 </div>
-                <motion.div {...stagger(12)} className="mt-4 text-sm text-foreground/60 font-serif italic">{slide.foot}</motion.div>
+                <motion.div {...stagger(12)} className="mt-4 text-sm text-foreground font-serif italic">{slide.foot}</motion.div>
               </div>
               <div className="flex justify-center items-center">
                 <SlideImageFrame src={heroImage} alt={slide.title} />
@@ -563,7 +546,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                     <div className="grid grid-cols-2 gap-3">
                       {slide.food.map((f, i) => (
                         <div key={i} className="rounded-xl bg-white/70 p-3 border border-border hover:border-gold/10 transition-all duration-300">
-                          <div className="text-[10px] text-foreground/50 uppercase tracking-wider font-semibold">{f.label}</div>
+                          <div className="text-[10px] text-foreground/85 uppercase tracking-wider font-semibold">{f.label}</div>
                           <div className="font-mono font-bold text-lg text-green mt-1">{f.value}</div>
                         </div>
                       ))}
@@ -623,7 +606,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                             DV: {p.dv}
                           </div>
                         </div>
-                        <div className="mt-4 font-mono text-sm text-foreground/80 bg-cream border border-gold/10 rounded-xl px-3 py-2">
+                        <div className="mt-4 font-mono text-sm text-foreground bg-cream border border-gold/10 rounded-xl px-3 py-2">
                           {p.calc}
                         </div>
                       </div>
@@ -656,7 +639,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                     <div className="space-y-2">
                       {slide.macros.map((m, i) => (
                         <div key={i} className="flex justify-between items-center rounded-lg bg-white/70 px-3 py-2 border border-border/40 font-sans text-xs">
-                          <span className="font-medium text-foreground/80">{m.name}</span>
+                          <span className="font-medium text-foreground">{m.name}</span>
                           <span className="font-mono font-bold text-green">{m.g}</span>
                         </div>
                       ))}
@@ -667,7 +650,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                     <div className="space-y-2">
                       {slide.dv.map((m, i) => (
                         <div key={i} className="flex justify-between items-center rounded-lg bg-white/70 px-3 py-2 border border-border/40 font-sans text-xs">
-                          <span className="font-medium text-foreground/80">{m.name}</span>
+                          <span className="font-medium text-foreground">{m.name}</span>
                           <span className="font-mono font-bold text-orange">{m.pct}</span>
                         </div>
                       ))}
@@ -678,7 +661,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                     <div className="space-y-2 font-mono text-xs">
                       {slide.example.map((m, i) => (
                         <div key={i} className="rounded-lg bg-cream border border-gold/10 px-3 py-2">
-                          <span className="text-foreground/50 font-sans font-medium">{m.name}: </span>
+                          <span className="text-foreground/85 font-sans font-medium">{m.name}: </span>
                           <span className="text-green font-bold">{m.calc}</span>
                         </div>
                       ))}
@@ -700,7 +683,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
             <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] items-center max-w-7xl">
               <div>
                 <Title>{slide.title}</Title>
-                <motion.p {...stagger(1)} className="mt-3 text-lg text-foreground/75 max-w-3xl">{slide.lead}</motion.p>
+                <motion.p {...stagger(1)} className="mt-3 text-lg text-foreground max-w-3xl">{slide.lead}</motion.p>
                 <div className="luxury-divider my-4 max-w-xl" />
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   {slide.items.map((it, i) => (
@@ -720,7 +703,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                         <div className="mt-2 inline-block rounded-full bg-green-soft border border-green/15 text-green px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider group-hover:bg-green group-hover:text-cream transition-all duration-300">
                           {it.rule}
                         </div>
-                        <p className="mt-3 text-xs text-foreground/80 leading-relaxed font-sans">{it.desc}</p>
+                        <p className="mt-3 text-xs text-foreground leading-relaxed font-sans">{it.desc}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -754,7 +737,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                         const isGood = h.verdict === "good";
                         return (
                           <div key={i} className="flex items-center justify-between rounded-lg bg-white/70 px-3 py-2 border border-border/40 font-sans text-xs">
-                            <span className="font-medium text-foreground/80">{h.label}</span>
+                            <span className="font-medium text-foreground">{h.label}</span>
                             <span className={`rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider border ${
                               isGood 
                                 ? "bg-green-soft border-green/10 text-green" 
@@ -780,7 +763,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                         const isGood = h.verdict === "good";
                         return (
                           <div key={i} className="flex items-center justify-between rounded-lg bg-white/70 px-3 py-2 border border-border/40 font-sans text-xs">
-                            <span className="font-medium text-foreground/80">{h.label}</span>
+                            <span className="font-medium text-foreground">{h.label}</span>
                             <span className={`rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider border ${
                               isGood 
                                 ? "bg-green-soft border-green/10 text-green" 
@@ -819,7 +802,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                         <motion.li 
                           key={i} 
                           whileHover={{ x: 4 }}
-                          className="rounded-xl bg-green-soft border border-green/5 px-4 py-3 text-foreground/80 font-sans text-xs leading-relaxed flex items-start gap-2.5 transition-all duration-300"
+                          className="rounded-xl bg-green-soft border border-green/5 px-4 py-3 text-foreground font-sans text-xs leading-relaxed flex items-start gap-2.5 transition-all duration-300"
                         >
                           <span className="text-green text-base font-bold">✦</span>
                           <span>{g}</span>
@@ -836,7 +819,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                         <motion.li 
                           key={i} 
                           whileHover={{ x: 4 }}
-                          className="rounded-xl bg-orange-soft border border-orange/5 px-4 py-3 text-foreground/80 font-sans text-xs leading-relaxed flex items-start gap-2.5 transition-all duration-300"
+                          className="rounded-xl bg-orange-soft border border-orange/5 px-4 py-3 text-foreground font-sans text-xs leading-relaxed flex items-start gap-2.5 transition-all duration-300"
                         >
                           <span className="text-orange text-base font-bold">✦</span>
                           <span>{g}</span>
@@ -859,7 +842,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
             <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] items-center max-w-7xl">
               <div>
                 <Title>{slide.title}</Title>
-                <motion.p {...stagger(1)} className="mt-3 text-lg text-foreground/75 max-w-3xl">{slide.lead}</motion.p>
+                <motion.p {...stagger(1)} className="mt-3 text-lg text-foreground max-w-3xl">{slide.lead}</motion.p>
                 <div className="luxury-divider my-4 max-w-xl" />
                 
                 <div className="grid gap-5 sm:grid-cols-2">
@@ -879,11 +862,11 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                     </div>
                     <div className="space-y-2 text-sm font-sans">
                       <div className="flex justify-between items-center bg-white/50 px-3 py-1.5 rounded-lg border border-border">
-                        <span className="text-foreground/70 font-medium text-xs">Nutrients per 100g:</span>
+                        <span className="text-foreground/95 font-medium text-xs">Nutrients per 100g:</span>
                         <span className="font-mono font-bold text-green text-xs">{slide.example.per100}</span>
                       </div>
                       <div className="flex justify-between items-center bg-white/50 px-3 py-1.5 rounded-lg border border-border">
-                        <span className="text-foreground/70 font-medium text-xs">Portion eaten:</span>
+                        <span className="text-foreground/95 font-medium text-xs">Portion eaten:</span>
                         <span className="font-mono font-bold text-green text-xs">{slide.example.eat}</span>
                       </div>
                       <div className="font-mono text-xs bg-cream border border-gold/15 rounded-lg px-3 py-2 text-foreground/90">
@@ -992,25 +975,35 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
             <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] items-center max-w-7xl">
               <div>
                 <Title>{slide.title}</Title>
-                <motion.p {...stagger(1)} className="mt-3 text-lg text-foreground/75 max-w-3xl">{slide.lead}</motion.p>
+                <motion.p {...stagger(1)} className="mt-3 text-lg text-foreground max-w-3xl">{slide.lead}</motion.p>
                 <div className="luxury-divider my-4 max-w-xl" />
                 <div className="mt-6 grid gap-4 sm:grid-cols-3">
-                  {slide.items.map((it, i) => (
-                    <motion.div 
-                      key={i} 
-                      {...stagger(i + 2)} 
-                      whileHover={{ y: -6, scale: 1.02 }} 
-                      className="glass rounded-2xl p-6 text-center border border-border transition-all duration-300"
+                  {(slide.items as { icon: string; name: string }[]).map((it, i) => (
+                    <motion.div
+                      key={i}
+                      {...stagger(i + 2)}
+                      whileHover={{ y: -6, scale: 1.02 }}
+                      className="glass rounded-2xl overflow-hidden border border-border transition-all duration-300 shadow-md"
                     >
-                      <div className="text-4xl mb-3 animate-[bounce_3s_infinite]">{["🥤", "🥬", "🌿"][i] ?? "✦"}</div>
-                      <div className="text-base font-serif font-bold text-green tracking-tight leading-snug">{it}</div>
+                      <div className="w-full h-36 overflow-hidden">
+                        <img
+                          src={it.icon.startsWith("photo-")
+                            ? `https://images.unsplash.com/${it.icon}?w=400&h=280&fit=crop&auto=format&q=80`
+                            : it.icon}
+                          alt={it.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="px-4 py-3 text-center">
+                        <div className="text-base font-serif font-bold text-green tracking-tight leading-snug">{it.name}</div>
+                      </div>
                     </motion.div>
                   ))}
                 </div>
                 {slide.quote && (
                   <motion.div {...stagger(8)} className="mt-6 border-t border-gold/20 pt-4">
-                    <span className="script-accent text-2xl text-orange/95 font-normal block mb-1">Coach Kerry says:</span>
-                    <p className="text-lg italic text-green font-serif">"{slide.quote}"</p>
+                    <span className="text-xl text-orange font-semibold block mb-1">Coach Kerry says:</span>
+                    <p className="text-lg md:text-xl italic text-green font-semibold font-serif">"{slide.quote}"</p>
                   </motion.div>
                 )}
               </div>
@@ -1033,7 +1026,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                   className="relative rounded-2xl glass p-6 border border-gold/20 shadow-md mt-6"
                 >
                   <div className="absolute -top-5 -right-5 text-4xl text-gold/20 select-none pointer-events-none">🌱</div>
-                  <p className="text-xl leading-relaxed text-green font-serif font-light">
+                  <p className="text-xl leading-relaxed text-green font-serif font-medium">
                     {slide.body}
                   </p>
                 </motion.div>
@@ -1079,7 +1072,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                               key={i} 
                               className="flex justify-between items-center rounded-lg bg-white/70 hover:bg-cream border border-border/30 hover:border-gold/15 px-3 py-1.5 text-xs transition-all duration-200"
                             >
-                              <span className="text-foreground/85 font-sans leading-tight">{it.f}</span>
+                              <span className="text-foreground font-sans leading-tight">{it.f}</span>
                               <span className="font-mono font-bold text-orange">{it.c}</span>
                             </div>
                           ))}
@@ -1104,7 +1097,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
               <div>
                 <Title>{slide.title}</Title>
                 <div className="luxury-divider my-4 max-w-xl" />
-                <motion.p {...stagger(1)} className="mt-4 text-lg text-foreground/85 leading-relaxed font-serif font-light">
+                <motion.p {...stagger(1)} className="mt-4 text-lg text-foreground leading-relaxed font-serif font-medium">
                   {slide.body}
                 </motion.p>
                 <div className="mt-6">
@@ -1120,7 +1113,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                         className="glass group rounded-xl px-4 py-3 flex items-center gap-2 border border-border hover:border-gold/25"
                       >
                         <span className="flex size-2 shrink-0 rounded-full bg-orange group-hover:bg-green transition-colors duration-300" />
-                        <span className="font-sans font-medium text-foreground/80 text-sm group-hover:text-green transition-colors duration-300">{s}</span>
+                        <span className="font-sans font-medium text-foreground text-sm group-hover:text-green transition-colors duration-300">{s}</span>
                       </motion.div>
                     ))}
                   </div>
@@ -1152,7 +1145,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                         }`}
                       >
                         <div className={`text-xl font-serif font-bold ${isGreen ? "text-green" : "text-orange"}`}>{g.name}</div>
-                        <div className="mt-1 text-xs text-foreground/60 font-serif italic">{g.note}</div>
+                        <div className="mt-1 text-xs text-foreground font-serif italic">{g.note}</div>
                         <div className="luxury-divider my-3 opacity-30" />
                         <div className="mt-4 flex flex-wrap gap-2">
                           {g.items.map((it, i) => (
@@ -1188,7 +1181,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
             <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] items-center max-w-7xl">
               <div>
                 <Title>{slide.title}</Title>
-                {slide.lead && <motion.p {...stagger(1)} className="mt-3 text-lg text-foreground/75 max-w-3xl">{slide.lead}</motion.p>}
+                {slide.lead && <motion.p {...stagger(1)} className="mt-3 text-lg text-foreground max-w-3xl">{slide.lead}</motion.p>}
                 <div className="luxury-divider my-4 max-w-xl" />
                 
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -1203,10 +1196,10 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                         <div className="text-lg font-serif font-bold text-green border-b border-border pb-1.5 group-hover:text-orange transition-colors duration-300">
                           {v.name}
                         </div>
-                        <p className="mt-2 text-xs text-foreground/80 leading-relaxed font-sans">{v.desc}</p>
+                        <p className="mt-2 text-xs text-foreground leading-relaxed font-sans">{v.desc}</p>
                       </div>
                       <div className="mt-3 pt-2 border-t border-border/40">
-                        <div className="text-[10px] text-foreground/45 uppercase tracking-widest font-semibold mb-0.5">Sources</div>
+                        <div className="text-[10px] text-foreground/80 uppercase tracking-widest font-semibold mb-0.5">Sources</div>
                         <div className="text-xs text-orange font-medium font-serif">{v.sources}</div>
                       </div>
                     </motion.div>
@@ -1220,7 +1213,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {slide.pattern.map((p, i) => (
-                        <span key={i} className="rounded-full bg-cream border border-gold/15 px-3 py-1.5 text-xs font-sans font-medium text-foreground/80">
+                        <span key={i} className="rounded-full bg-cream border border-gold/15 px-3 py-1.5 text-xs font-sans font-medium text-foreground">
                           ✦ {p}
                         </span>
                       ))}
@@ -1256,11 +1249,11 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                         <div>
                           <div className={`text-[10px] font-mono tracking-widest font-bold ${isGreen ? "text-green" : "text-orange"}`}>{m.n}</div>
                           <div className="mt-2 text-xl font-serif font-bold text-green tracking-tight">{m.name}</div>
-                          <p className="mt-2 text-xs text-foreground/80 leading-relaxed font-sans">{m.desc}</p>
+                          <p className="mt-2 text-xs text-foreground leading-relaxed font-sans">{m.desc}</p>
                         </div>
                         <div className="mt-4 border-t border-border pt-3">
                           <div className="text-[10px] uppercase tracking-widest text-gold font-bold mb-0.5">Examples</div>
-                          <p className="text-xs text-foreground/70 leading-relaxed font-serif italic">
+                          <p className="text-xs text-foreground/95 leading-relaxed font-serif italic">
                             {m.examples}
                           </p>
                         </div>
@@ -1288,7 +1281,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
             <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] items-center max-w-7xl">
               <div>
                 <Title>{slide.title}</Title>
-                <motion.p {...stagger(1)} className="mt-3 text-lg text-foreground/75 max-w-3xl">{slide.lead}</motion.p>
+                <motion.p {...stagger(1)} className="mt-3 text-lg text-foreground max-w-3xl">{slide.lead}</motion.p>
                 <div className="luxury-divider my-4 max-w-xl" />
                 <div className="grid gap-6 sm:grid-cols-2">
                   <div className="grid gap-3">
@@ -1304,7 +1297,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                         </div>
                         <div>
                           <div className="text-base font-serif font-bold text-green tracking-tight leading-snug">{p.label}</div>
-                          <div className="text-xs text-foreground/75 font-sans mt-0.5 leading-relaxed">{p.desc}</div>
+                          <div className="text-xs text-foreground font-sans mt-0.5 leading-relaxed">{p.desc}</div>
                         </div>
                       </motion.div>
                     ))}
@@ -1321,13 +1314,13 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                       <div className="space-y-3">
                         {slide.hands.map((h, i) => (
                           <div key={i} className="flex items-center justify-between border-b border-border/60 pb-2 font-sans text-sm">
-                            <span className="font-medium text-foreground/80">{h.label}</span>
+                            <span className="font-medium text-foreground">{h.label}</span>
                             <span className="text-orange font-serif font-bold">{h.portion}</span>
                           </div>
                         ))}
                       </div>
                     </div>
-                    <div className="mt-4 text-[10px] text-foreground/45 font-serif italic text-center">
+                    <div className="mt-4 text-[10px] text-foreground/80 font-serif italic text-center">
                       ✦ Easy portion estimation without scales.
                     </div>
                   </motion.div>
@@ -1343,13 +1336,13 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
 
       case "conclusion":
         return (
-          <div className="relative grid h-full w-full place-items-center overflow-y-auto px-6 pt-36 pb-36 md:px-16 scrollbar-hide">
+          <div className="relative grid h-full w-full place-items-center overflow-hidden px-6 pt-24 pb-20 md:px-16">
             {/* Decorative background orbs for balance */}
             <div aria-hidden className="pointer-events-none absolute -top-10 -left-10 size-72 rounded-full bg-orange/20 blur-3xl opacity-60 animate-[pulse_8s_infinite]" />
             <div aria-hidden className="pointer-events-none absolute -bottom-16 -right-10 size-80 rounded-full bg-green/20 blur-3xl opacity-60 animate-[pulse_10s_infinite]" />
             <div aria-hidden className="pointer-events-none absolute top-1/3 right-1/4 size-40 rounded-full bg-cream blur-2xl opacity-60" />
 
-            <div className="relative mx-auto w-full max-w-5xl text-center">
+            <div className="relative mx-auto w-full max-w-5xl text-center max-h-full overflow-y-auto scrollbar-hide">
               {/* Eyebrow centered on top */}
               <motion.div {...stagger(0)} className="flex justify-center">
                 <Eyebrow>The End — Thank You</Eyebrow>
@@ -1363,10 +1356,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 className="relative mx-auto mt-8 w-fit"
               >
                 <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-orange/35 via-cream to-green/35 blur-xl" />
-                <div className="absolute -inset-3 rounded-full border border-dashed border-gold/40 animate-[spin_35s_linear_infinite]" />
                 <motion.div
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                   className="relative size-36 md:size-44 overflow-hidden rounded-full ring-4 ring-white shadow-2xl border border-gold/25"
                 >
                   <img src={coachPortrait} alt="Kerry-Ann Walker" className="size-full object-cover" />
@@ -1388,7 +1378,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
               </motion.div>
 
               {/* Body */}
-              <motion.p {...stagger(3)} className="mx-auto mt-6 max-w-2xl text-xl md:text-2xl text-foreground/80 leading-relaxed font-serif font-light">
+              <motion.p {...stagger(3)} className="mx-auto mt-6 max-w-2xl text-xl md:text-2xl text-foreground leading-relaxed font-serif font-medium">
                 {slide.body}
               </motion.p>
 
@@ -1396,7 +1386,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
               <motion.div {...stagger(4)} className="mx-auto mt-8 max-w-2xl">
                 <div className="relative rounded-3xl glass px-8 py-6 border border-gold/20 shadow-xl">
                   <span className="absolute -top-4 left-6 text-5xl text-orange/30 font-serif leading-none">“</span>
-                  <blockquote className="text-2xl md:text-3xl italic text-orange font-serif font-medium leading-relaxed">
+                  <blockquote className="text-2xl md:text-3xl italic text-orange font-serif font-semibold leading-relaxed">
                     {slide.quote}
                   </blockquote>
                   <span className="absolute -bottom-8 right-6 text-5xl text-orange/30 font-serif leading-none">”</span>
@@ -1405,13 +1395,13 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
 
               {/* Contact row with icons */}
               <motion.div {...stagger(5)} className="mt-12 flex flex-wrap items-center justify-center gap-4">
-                <span className="inline-flex items-center gap-2 rounded-full glass border border-white/60 px-6 py-3.5 text-base text-foreground/85 shadow-md hover:border-gold/25 transition-all duration-300">
+                <span className="inline-flex items-center gap-2 rounded-full glass border border-white/60 px-6 py-3.5 text-base text-foreground shadow-md hover:border-gold/25 transition-all duration-300">
                   <span aria-hidden>📞</span>{slide.contact.phone}
                 </span>
-                <span className="inline-flex items-center gap-2 rounded-full glass border border-white/60 px-6 py-3.5 text-base text-foreground/85 shadow-md hover:border-gold/25 transition-all duration-300">
+                <span className="inline-flex items-center gap-2 rounded-full glass border border-white/60 px-6 py-3.5 text-base text-foreground shadow-md hover:border-gold/25 transition-all duration-300">
                   <span aria-hidden>✉️</span>{slide.contact.email}
                 </span>
-                <a href="https://www.kerrystable.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full glass border border-white/60 px-6 py-3.5 text-base text-foreground/85 shadow-md hover:border-orange/25 transition-all duration-300">
+                <a href="https://www.kerrystable.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full glass border border-white/60 px-6 py-3.5 text-base text-foreground shadow-md hover:border-orange/25 transition-all duration-300">
                   <span aria-hidden>🌐</span>{slide.contact.site}
                 </a>
               </motion.div>
@@ -1439,10 +1429,14 @@ function SlideShell({
   eyebrowVariant?: "orange" | "green";
 }) {
   return (
-    <div className="relative z-10 h-full w-full overflow-y-auto px-5 pt-36 pb-36 sm:px-8 md:px-12 md:pt-40 md:pb-40 lg:px-16 lg:pt-44 lg:pb-44 scrollbar-hide">
-      <div className="mx-auto w-full max-w-6xl">
-        {eyebrow && <Eyebrow variant={eyebrowVariant}>{eyebrow}</Eyebrow>}
-        <div className="mt-4">{children}</div>
+    <div className="relative z-10 h-full w-full flex flex-col px-5 pt-20 pb-20 sm:px-8 md:px-12 md:pt-24 md:pb-24 lg:px-16 lg:pt-28 lg:pb-28 overflow-hidden">
+      <div className="mx-auto my-auto w-full max-w-6xl max-h-full overflow-y-auto scrollbar-hide">
+        {eyebrow && (
+          <div className="mb-4 flex">
+            <Eyebrow variant={eyebrowVariant}>{eyebrow}</Eyebrow>
+          </div>
+        )}
+        <div className="w-full">{children}</div>
       </div>
     </div>
   );

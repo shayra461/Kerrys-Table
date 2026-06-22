@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { slides } from "@/data/slides";
 import { SlideRenderer } from "./SlideRenderer";
-import { FloatingFruits } from "./FloatingFruits";
 import { imageFor } from "@/data/slideImages";
 import logo from "@/assets/logo.png";
 
@@ -115,7 +114,6 @@ export function Deck() {
       </AnimatePresence>
 
       <div className="deck-bg deck-grain" />
-      <FloatingFruits />
 
       {/* Top bar: logo + counter + grid toggle */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex items-center justify-between px-6 py-5 md:px-10">
@@ -157,55 +155,34 @@ export function Deck() {
       </div>
 
       {/* Nav controls */}
-      <div className="absolute inset-x-0 bottom-0 z-30 px-4 pb-4 md:px-10 md:pb-8">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 md:gap-4">
+      <div className="absolute inset-x-0 bottom-6 z-30 flex justify-center">
+        <div className="flex items-center gap-4 rounded-full glass px-4 py-1.5 shadow-lg border border-white/60">
           <button
             onClick={() => go(index - 1)}
             disabled={index === 0}
-            className="grid size-11 md:size-14 shrink-0 place-items-center rounded-full glass text-green transition hover:scale-105 hover:text-orange disabled:opacity-30 disabled:hover:scale-100"
+            className="grid size-10 place-items-center rounded-full text-green hover:bg-white/40 hover:text-orange transition disabled:opacity-20 disabled:hover:bg-transparent disabled:hover:text-green"
             aria-label="Previous slide"
           >
-            <svg viewBox="0 0 24 24" className="size-5 md:size-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
           </button>
 
-          <div className="flex-1 min-w-0">
-            <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/60 backdrop-blur">
-              <motion.div
-                className="h-full bg-gradient-to-r from-orange to-green"
-                animate={{ width: `${progress}%` }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] as const }}
-              />
-            </div>
-            {/* Dot row: hidden on mobile (too many slides), shown on tablet+ */}
-            <div className="mt-2 hidden md:flex justify-center gap-1">
-              {slides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => go(i)}
-                  className={`h-1.5 rounded-full transition-all ${
-                    i === index ? "w-6 bg-orange" : "w-1.5 bg-foreground/20 hover:bg-foreground/40"
-                  }`}
-                  aria-label={`Go to slide ${i + 1}`}
-                />
-              ))}
-            </div>
-            {/* Mobile-only compact counter */}
-            <div className="mt-2 text-center text-xs font-mono tabular-nums text-foreground/60 md:hidden">
-              {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-            </div>
+          <div className="h-4 w-px bg-foreground/15" />
+
+          {/* Simple compact slide counter */}
+          <div className="text-sm font-mono tracking-wider text-foreground/75 min-w-[50px] text-center select-none font-bold">
+            {index + 1} / {total}
           </div>
+
+          <div className="h-4 w-px bg-foreground/15" />
 
           <button
             onClick={() => go(index + 1)}
             disabled={index === total - 1}
-            className="grid size-11 md:size-14 shrink-0 place-items-center rounded-full glass text-green transition hover:scale-105 hover:text-orange disabled:opacity-30 disabled:hover:scale-100"
+            className="grid size-10 place-items-center rounded-full text-green hover:bg-white/40 hover:text-orange transition disabled:opacity-20 disabled:hover:bg-transparent disabled:hover:text-green"
             aria-label="Next slide"
           >
-            <svg viewBox="0 0 24 24" className="size-5 md:size-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
           </button>
-        </div>
-        <div className="mt-3 hidden md:block text-center text-xs text-foreground/40 tracking-widest uppercase">
-          ← → to navigate · G for grid · F for fullscreen
         </div>
       </div>
 

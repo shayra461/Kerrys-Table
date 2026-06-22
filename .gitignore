@@ -32,3 +32,11 @@ dist-ssr
 *.sw?
 .vercel/
 
+.vercel
+
+# Temp Chrome profiles (used by browser tools)
+tmp-chrome-profile/
+tmp-chrome-profile-new/
+
+# Scratch/temp files
+scratch/
