@@ -210,12 +210,12 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
         return (
           <SlideShell eyebrow="Introduction">
             <div className="grid items-center gap-12 md:grid-cols-[0.95fr_1.05fr] lg:gap-16 pt-2">
-              <motion.div {...stagger(1)} className="relative mx-auto aspect-[3/4] w-full max-w-xs lg:max-w-sm max-h-[40vh]">
+              <motion.div {...stagger(1)} className="relative mx-auto w-full max-w-xs lg:max-w-sm max-h-[40vh] flex items-center justify-center">
                 <motion.div
-                  className="relative h-full w-full overflow-hidden rounded-[2rem] border border-black/8"
+                  className="relative overflow-hidden rounded-[2rem] border border-black/8"
                   style={{ boxShadow: "0 8px 40px 0 rgba(0,0,0,0.13), 0 1.5px 6px 0 rgba(0,0,0,0.07)" }}
                 >
-                  <img src={coachPortrait} alt={slide.name} className="absolute inset-0 size-full object-cover object-top transition-transform duration-500 hover:scale-105" />
+                  <img src={coachPortrait} alt={slide.name} className="w-full h-auto max-h-[40vh] object-contain transition-transform duration-500 hover:scale-105" />
                 </motion.div>
               </motion.div>
               <div className="flex flex-col justify-center">
