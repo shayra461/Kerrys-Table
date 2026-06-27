@@ -28,6 +28,9 @@ import combinedMacrosNew from "../assets/combined-macros-new.jpg";
 import carbs2 from "../assets/carbs-2-new.jpg";
 import healthyImageNew from "../assets/healthy-image-new.jpg";
 import fatCalories2 from "../assets/fat-calories-2.jpg";
+import smartShopping from "../assets/smart-shopping.webp";
+import fishAndMilk from "../assets/fish-and-milk.jpg";
+import balancedPlateNew from "../assets/balanced-plate-new.jpg";
 
 // Premium curated Unsplash photo IDs that map uniquely to slide topics.
 // Returned as full URLs at a sensible size with absolutely no duplicates.
@@ -61,7 +64,7 @@ const IMAGES: Record<number, string> = {
   17: nutritionLabel2nd, // Comparing Foods — 2nd nutrition label (client-provided)
   18: U("photo-1505576399279-565b52d4ac71"), // Evaluate Nutrition Labels Quickly (old slide-11 image — reading label on bottle)
   19: U("photo-1490474418585-ba9bad8fd0ea"), // Important label thresholds (two contrasting breakfast bowls)
-  20: healthyPlate, // Key Indicators for Smart Shopping — healthy plate (client-provided)
+  20: smartShopping, // Key Indicators for Smart Shopping — healthy plate (client-provided)
   21: coachDoes, // Simple Formula (smart kitchen scale & food tracker tablet - client-provided)
 
   // Ch 4: Better vs Less-Ideal Choices
@@ -83,7 +86,7 @@ const IMAGES: Record<number, string> = {
   35: U("photo-1540420773420-3366772f4999"), // Vegetable Calories Low (fresh vegetable assortment)
   36: U("photo-1597362925123-77861d3fbac7"), // Vegetable Calories Starchy (celery, zucchini, carrots, potatoes)
   37: proteinNew, // Protein Calories Lean (lean grilled chicken breast sliced - client-provided)
-  38: U("photo-1551024601-bec78aea704b"), // Protein Calories Fish/Dairy (greek yogurt bowl with honey and almonds)
+  38: fishAndMilk, // Protein Calories Fish/Dairy (fish & milk - client-provided)
   39: U("photo-1604908176997-125f25cc6f3d"), // Protein Calories Plant/Nuts (organic pumpkin seeds, almonds, walnuts)
   40: carbsNew, // Carbohydrate Calories Grains (baked sweet potatoes - client-provided)
   41: carbs1, // Carbohydrate Calories Legumes/Fruits (appropriate carbs 1 - client-provided)
@@ -103,7 +106,7 @@ const IMAGES: Record<number, string> = {
   51: carbs2, // Good Carbohydrates (carbohydrates 2 image - client-provided)
   52: U("photo-1506976785307-8732e854ad03"), // Good Protein (healthy organic free-range eggs in a bowl)
   53: U("photo-1519708227418-c8fd9a32b7a2"), // Good Fats (healthy salmon dish - unique)
-  54: balancedPlate, // A Balanced Plate (plate split into 50% veg, 25% protein, 25% carb - client-provided)
+  54: balancedPlateNew, // A Balanced Plate (plate split into 50% veg, 25% protein, 25% carb - client-provided)
   55: U("photo-1506126613408-eca07ce68773"), // Conclusion (stunning sunset celebration of healthy life)
 };
 
