@@ -6,7 +6,7 @@ import { imageFor } from "@/data/slideImages";
 
 // Premium framed image component with clean shadow.
 function SlideImageFrame({ src, alt, objectPosition = "center" }: { src: string; alt: string; objectPosition?: string }) {
-  const isDiagram = src.includes("balanced-diet") || src.includes("balanced-plate");
+  const isDiagram = src.includes("balanced-diet") || (src.includes("balanced-plate") && !src.includes("balanced-plate-new"));
 
   return (
     <motion.div
