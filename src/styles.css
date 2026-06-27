@@ -46,7 +46,7 @@
 :root {
   --radius: 1.25rem;
 
-  --brand-orange: #CA591B;          /* Sunset Terracotta Orange (Enhanced Contrast) */
+  --brand-orange: #FF6600;          /* Sunset Terracotta Orange (Enhanced Contrast) */
   --brand-orange-soft: #FCF4ED;
   --brand-green: #163F21;           /* Elegant Forest Green (Enhanced Contrast) */
   --brand-green-soft: #F2F7F3;
@@ -69,7 +69,7 @@
   --muted: #F2F4F2;
   --muted-foreground: #445548;      /* Higher contrast muted text */
   --accent: #FCF4ED;
-  --accent-foreground: #CA591B;
+  --accent-foreground: #FF6600;
   --destructive: #A93822;
   --destructive-foreground: #FCFAF2;
   --border: rgba(28, 74, 40, 0.08);
