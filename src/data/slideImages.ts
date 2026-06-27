@@ -27,6 +27,7 @@ import supplementsNew from "../assets/supplements-new.jpg";
 import combinedMacrosNew from "../assets/combined-macros-new.jpg";
 import carbs2 from "../assets/carbs-2-new.jpg";
 import healthyImageNew from "../assets/healthy-image-new.jpg";
+import fatCalories2 from "../assets/fat-calories-2.jpg";
 
 // Premium curated Unsplash photo IDs that map uniquely to slide topics.
 // Returned as full URLs at a sensible size with absolutely no duplicates.
@@ -88,7 +89,7 @@ const IMAGES: Record<number, string> = {
   41: carbs1, // Carbohydrate Calories Legumes/Fruits (appropriate carbs 1 - client-provided)
   42: carbsCaloriesSweets, // Carbohydrate Calories Sweets (soda glass with sugar - client-provided)
   43: fatCalorie, // Fat Calories Oils (avocado, olive oil, almonds - client-provided)
-  44: U("photo-1542990253-0d0f5be5f0ed"), // Fat Calories Seeds (chia, flax, pumpkin seeds - replacing banana)
+  44: fatCalories2, // Fat Calories Seeds, Avocado & Fatty Meats (client-provided)
 
   // Ch 6: Micronutrients & Vitamins
   45: U("photo-1584017911766-d451b3d0e843"), // What Are Micronutrients? (vibrant fresh vegetables and lemons)
