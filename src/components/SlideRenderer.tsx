@@ -1443,7 +1443,7 @@ function SlideShell({
   eyebrowVariant?: "orange" | "green";
 }) {
   return (
-    <div className="relative z-10 h-full w-full flex flex-col px-5 pt-20 pb-20 sm:px-8 md:px-12 md:pt-24 md:pb-24 lg:px-16 lg:pt-28 lg:pb-28 overflow-hidden">
+    <div className="relative z-10 h-full w-full flex flex-col px-5 pt-24 pb-20 sm:px-8 sm:pt-26 md:px-12 md:pt-28 md:pb-24 lg:px-16 lg:pt-32 lg:pb-28 overflow-hidden">
       <div className="mx-auto my-auto w-full max-w-6xl max-h-full overflow-y-auto scrollbar-hide">
         {eyebrow && (
           <div className="mb-4 flex">

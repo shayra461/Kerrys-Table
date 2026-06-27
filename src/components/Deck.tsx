@@ -116,9 +116,9 @@ export function Deck() {
       <div className="deck-bg deck-grain" />
 
       {/* Top bar: logo + counter + grid toggle */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex items-center justify-between px-6 py-5 md:px-10">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex items-center justify-between px-4 py-3 md:px-8 md:py-4 lg:px-10 lg:py-5">
         <div className="pointer-events-auto flex items-center">
-          <img src={logo} alt="Kerry's Nutrition" className="size-24 md:size-30 lg:size-36 object-contain drop-shadow-lg" />
+          <img src={logo} alt="Kerry's Nutrition" className="h-12 w-auto sm:h-16 md:h-20 lg:h-24 object-contain drop-shadow-lg" />
         </div>
         <div className="pointer-events-auto flex items-center gap-3">
           <button
