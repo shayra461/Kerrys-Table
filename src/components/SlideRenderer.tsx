@@ -4,8 +4,8 @@ import logo from "@/assets/logo.png";
 import coachPortrait from "@/assets/kerry-ann-walker.jpeg";
 import { imageFor } from "@/data/slideImages";
 
-// Premium framed image component with glowing backgrounds.
-function SlideImageFrame({ src, alt }: { src: string; alt: string }) {
+// Premium framed image component with clean shadow.
+function SlideImageFrame({ src, alt, objectPosition = "center" }: { src: string; alt: string; objectPosition?: string }) {
   const isDiagram = src.includes("balanced-diet") || src.includes("balanced-plate");
 
   return (
@@ -15,18 +15,18 @@ function SlideImageFrame({ src, alt }: { src: string; alt: string }) {
       transition={{ duration: 0.8, ease: EASE }}
       className="relative w-full h-[240px] sm:h-[280px] md:h-[320px] lg:h-[380px] xl:h-[420px] max-h-[48vh] max-w-sm lg:max-w-md mx-auto z-10 shrink-0"
     >
-      {/* Soft background glow */}
-      <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-green/20 via-gold/10 to-orange/15 blur-2xl opacity-75" />
-
-      {/* Main Image Card */}
-      <div className="relative h-full w-full overflow-hidden rounded-[2rem] border-2 border-gold/25 shadow-2xl bg-white/10 backdrop-blur-sm">
+      {/* Main Image Card — clean consistent shadow, no colored glow */}
+      <div
+        className="relative h-full w-full overflow-hidden rounded-[2rem] border border-black/8"
+        style={{ boxShadow: "0 8px 40px 0 rgba(0,0,0,0.13), 0 1.5px 6px 0 rgba(0,0,0,0.07)" }}
+      >
         <img 
           src={src} 
           alt={alt} 
-          className={`size-full ${isDiagram ? "object-contain bg-white/75 p-4" : "object-cover"} transition-transform duration-700 hover:scale-110`} 
+          className={`size-full ${isDiagram ? "object-contain bg-white/75 p-4" : "object-cover"} transition-transform duration-700 hover:scale-110`}
+          style={!isDiagram ? { objectPosition } : undefined}
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-green/45 via-transparent to-transparent pointer-events-none" />
       </div>
     </motion.div>
   );
@@ -128,12 +128,11 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                 className="relative mx-auto aspect-square w-full max-w-sm lg:max-w-md max-h-[45vh]"
               >
-                <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-orange/30 via-cream to-green/20 blur-2xl opacity-80" />
                 <motion.div
-                  className="relative h-full w-full overflow-hidden rounded-[2.5rem] border-2 border-gold/20 shadow-2xl"
+                  className="relative h-full w-full overflow-hidden rounded-[2.5rem] border border-black/8"
+                  style={{ boxShadow: "0 8px 40px 0 rgba(0,0,0,0.13), 0 1.5px 6px 0 rgba(0,0,0,0.07)" }}
                 >
                   <img src={heroImage} alt="Healthy plate" className="absolute inset-0 size-full object-cover transition-transform duration-500 hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-green/50 via-transparent to-transparent" />
                   <div className="absolute bottom-6 right-6 grid size-24 place-items-center rounded-full bg-white/90 border border-gold/15 backdrop-blur shadow-lg transition-transform duration-300 hover:scale-105">
                     <img src={logo} alt="Kerry's Table" className="size-18 object-contain" />
                   </div>
@@ -212,9 +211,9 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
           <SlideShell eyebrow="Introduction">
             <div className="grid items-center gap-12 md:grid-cols-[0.95fr_1.05fr] lg:gap-16 pt-2">
               <motion.div {...stagger(1)} className="relative mx-auto aspect-[3/4] w-full max-w-xs lg:max-w-sm max-h-[40vh]">
-                <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-green/30 to-orange/20 blur-2xl" />
                 <motion.div
-                  className="relative h-full w-full overflow-hidden rounded-[2rem] border-2 border-gold/20 shadow-2xl"
+                  className="relative h-full w-full overflow-hidden rounded-[2rem] border border-black/8"
+                  style={{ boxShadow: "0 8px 40px 0 rgba(0,0,0,0.13), 0 1.5px 6px 0 rgba(0,0,0,0.07)" }}
                 >
                   <img src={coachPortrait} alt={slide.name} className="absolute inset-0 size-full object-cover object-top transition-transform duration-500 hover:scale-105" />
                 </motion.div>
@@ -620,7 +619,11 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 </div>
               </div>
               <div className="flex justify-center items-center">
-                <SlideImageFrame src={heroImage} alt={slide.title} />
+                <SlideImageFrame
+                  src={heroImage}
+                  alt={slide.title}
+                  objectPosition={slide.imageIndex === 15 ? "top" : "center"}
+                />
               </div>
             </div>
           </SlideShell>
@@ -1039,7 +1042,7 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 </motion.div>
               </div>
               <div className="flex justify-center items-center">
-                <SlideImageFrame src={heroImage} alt={slide.title} />
+                <SlideImageFrame src={heroImage} alt={slide.title} objectPosition="left" />
               </div>
             </div>
           </SlideShell>
@@ -1393,16 +1396,27 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 </div>
               </motion.div>
 
-              {/* Contact row with icons */}
-              <motion.div {...stagger(5)} className="mt-12 flex flex-wrap items-center justify-center gap-4">
-                <span className="inline-flex items-center gap-2 rounded-full glass border border-white/60 px-6 py-3.5 text-base text-foreground shadow-md hover:border-gold/25 transition-all duration-300">
-                  <span aria-hidden>📞</span>{slide.contact.phone}
-                </span>
-                <span className="inline-flex items-center gap-2 rounded-full glass border border-white/60 px-6 py-3.5 text-base text-foreground shadow-md hover:border-gold/25 transition-all duration-300">
-                  <span aria-hidden>✉️</span>{slide.contact.email}
-                </span>
-                <a href="https://www.kerrystable.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full glass border border-white/60 px-6 py-3.5 text-base text-foreground shadow-md hover:border-orange/25 transition-all duration-300">
-                  <span aria-hidden>🌐</span>{slide.contact.site}
+              {/* Contact row with premium vibrant branded tabs */}
+              <motion.div {...stagger(5)} className="mt-12 flex flex-wrap items-center justify-center gap-5">
+                <a
+                  href={`tel:${slide.contact.phone}`}
+                  className="inline-flex items-center gap-3 rounded-2xl bg-green/10 border border-green/30 px-6 py-4 text-base font-bold text-green shadow-md hover:bg-green hover:text-white transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 active:scale-95"
+                >
+                  <span className="text-xl" aria-hidden>📞</span> {slide.contact.phone}
+                </a>
+                <a
+                  href={`mailto:${slide.contact.email}`}
+                  className="inline-flex items-center gap-3 rounded-2xl bg-orange/10 border border-orange/30 px-6 py-4 text-base font-bold text-orange shadow-md hover:bg-orange hover:text-white transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 active:scale-95"
+                >
+                  <span className="text-xl" aria-hidden>✉️</span> {slide.contact.email}
+                </a>
+                <a
+                  href="https://www.kerrystable.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 rounded-2xl bg-gold/10 border border-gold/30 px-6 py-4 text-base font-bold text-[#b59841] shadow-md hover:bg-gold hover:text-white transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 active:scale-95"
+                >
+                  <span className="text-xl" aria-hidden>🌐</span> {slide.contact.site}
                 </a>
               </motion.div>
             </div>

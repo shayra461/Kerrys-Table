@@ -1,5 +1,9 @@
 import betterCarbs from "../assets/better-carbs.jpg";
 import betterProtein from "../assets/better-protein.jpg";
+import nutrientsCarbs from "../assets/nutrients-carbs.avif";
+import nutrientsProtein from "../assets/nutrients-protein.avif";
+import nutrientsFats from "../assets/nutrients-fats.jpg";
+import nutrientsVitamins from "../assets/nutrients-vitamins.webp";
 
 export type Slide = (
   | { kind: "cover"; title: string; subtitle: string; tagline: string; contact: { phone: string; email: string; site: string } }
@@ -137,10 +141,10 @@ export const slides: Slide[] = [
     imageIndex: 7,
     title: "Key Nutrients Your Body Needs",
     items: [
-      { icon: betterCarbs, name: "Carbohydrates", desc: "Your primary source of energy", color: "orange" },
-      { icon: betterProtein, name: "Protein", desc: "Muscle repair and growth", color: "green" },
-      { icon: "photo-1566393028639-d108a42c46a7", name: "Healthy Fats", desc: "Brain & hormone function", color: "orange" },
-      { icon: "photo-1584308666744-24d5c474f2ae", name: "Vitamins & Minerals", desc: "Overall health & immunity", color: "green" },
+      { icon: nutrientsCarbs, name: "Carbohydrates", desc: "Your primary source of energy", color: "orange" },
+      { icon: nutrientsProtein, name: "Protein", desc: "Muscle repair and growth", color: "green" },
+      { icon: nutrientsFats, name: "Healthy Fats", desc: "Brain & hormone function", color: "orange" },
+      { icon: nutrientsVitamins, name: "Vitamins & Minerals", desc: "Overall health & immunity", color: "green" },
       { icon: "photo-1548839140-29a749e1cf4d", name: "Water", desc: "Hydration & digestion", color: "orange" },
     ],
   },
@@ -453,8 +457,8 @@ export const slides: Slide[] = [
     lead: "You don't have to change everything overnight. Start small:",
     items: [
       { icon: "photo-1548839140-29a749e1cf4d", name: "Swap soda for water" },
-      { icon: "photo-1518843875459-f738682238a6", name: "Add more vegetables" },
-      { icon: "photo-1540420773420-3366772f4999", name: "Reduce processed foods" }
+      { icon: "photo-1540420773420-3366772f4999", name: "Add more vegetables" },
+      { icon: "photo-1565299624946-b28f40a0ae38", name: "Reduce processed foods" }
     ],
     quote: "Small changes lead to big results.",
   },
@@ -876,9 +880,9 @@ export const slides: Slide[] = [
     eyebrow: "Fiber · Vitamins · Stable Blood Sugar",
     tone: "better",
     items: [
-      "Oats", "Brown rice", "Quinoa", "Potatoes", "Sweet potatoes",
-      "Whole-grain bread or wraps", "Whole-grain pasta",
-      "Beans", "Lentils", "Berries, apples, bananas, oranges",
+      "Whole-grain pasta", "Whole-grain bread or wraps", "Oats",
+      "Brown rice", "Quinoa", "Potatoes & sweet potatoes",
+      "Beans & lentils", "Fruit (berries, apples, bananas, oranges)",
     ],
   },
   {
