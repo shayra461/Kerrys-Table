@@ -5,7 +5,19 @@ import coachPortrait from "@/assets/kerry-ann-walker.jpeg";
 import { imageFor } from "@/data/slideImages";
 
 // Premium framed image component with clean shadow.
-function SlideImageFrame({ src, alt, objectPosition = "center", objectFit }: { src: string; alt: string; objectPosition?: string; objectFit?: "cover" | "contain" }) {
+function SlideImageFrame({ 
+  src, 
+  alt, 
+  objectPosition = "center", 
+  objectFit,
+  className = "w-full h-[240px] sm:h-[280px] md:h-[320px] lg:h-[380px] xl:h-[420px] max-h-[48vh] max-w-sm lg:max-w-md mx-auto"
+}: { 
+  src: string; 
+  alt: string; 
+  objectPosition?: string; 
+  objectFit?: "cover" | "contain";
+  className?: string;
+}) {
   const isDiagram = src.includes("balanced-diet") || (src.includes("balanced-plate") && !src.includes("balanced-plate-new"));
   const fit = objectFit || (isDiagram ? "contain" : "cover");
 
@@ -14,7 +26,7 @@ function SlideImageFrame({ src, alt, objectPosition = "center", objectFit }: { s
       initial={{ opacity: 0, x: 30, scale: 0.95 }}
       animate={{ opacity: 1, x: 0, scale: 1 }}
       transition={{ duration: 0.8, ease: EASE }}
-      className="relative w-full h-[240px] sm:h-[280px] md:h-[320px] lg:h-[380px] xl:h-[420px] max-h-[48vh] max-w-sm lg:max-w-md mx-auto z-10 shrink-0"
+      className={`relative z-10 shrink-0 ${className}`}
     >
       {/* Main Image Card — clean consistent shadow, no colored glow */}
       <div
@@ -321,7 +333,12 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 <SlideImageFrame 
                   src={heroImage} 
                   alt={slide.title} 
-                  objectFit={heroImage.includes("healthy-eating-tips") ? "contain" : "cover"} 
+                  objectFit="cover"
+                  className={
+                    heroImage.includes("healthy-eating-tips")
+                      ? "aspect-[519/1024] h-[220px] sm:h-[260px] md:h-[420px] lg:h-[520px] xl:h-[560px] max-h-[55vh] mx-auto"
+                      : undefined
+                  }
                 />
               </div>
             </div>
