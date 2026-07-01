@@ -31,6 +31,7 @@ import fatCalories2 from "../assets/fat-calories-2.jpg";
 import smartShopping from "../assets/smart-shopping.webp";
 import fishAndMilk from "../assets/fish-and-milk.jpg";
 import balancedPlateNew from "../assets/balanced-plate-new.jpg";
+import vegetableChoices from "../assets/vegetable-choices.jpg";
 
 // Premium curated Unsplash photo IDs that map uniquely to slide topics.
 // Returned as full URLs at a sensible size with absolutely no duplicates.
@@ -75,7 +76,7 @@ const IMAGES: Record<number, string> = {
   26: U("photo-1534422298391-e4f8c172dddb"), // Less-Ideal Fat Choices (deep-fried greasy french fries/tempura)
   27: betterProtein, // Better Protein Choices (salmon with asparagus/quinoa - client-provided)
   28: lessIdealProtein, // Less-Ideal Protein Choices (sausages/cured meats on board - client-provided)
-  29: betterVegetables, // Better Vegetable Choices (fresh colorful salad bowl - client-provided)
+  29: vegetableChoices, // Better Vegetable Choices (non-starchy vs starchy - client-provided)
   30: broccoliCheese, // Less-Ideal Vegetable Choices — broccoli in cheese sauce (client-provided)
   31: U("photo-1602143407151-7111542de6e8"), // Small Changes Matter (premium reusable water bottle)
   32: healthyImageNew, // Your Health Is Your Responsibility (attractive healthy food image - client-provided)
