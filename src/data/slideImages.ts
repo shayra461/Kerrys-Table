@@ -34,6 +34,7 @@ import balancedPlateNew from "../assets/balanced-plate-new.jpg";
 import vegetableChoices from "../assets/vegetable-choices.jpg";
 import healthyEatingTips from "../assets/healthy-eating-tips.jpg";
 import nutritionLabelComparing from "../assets/nutrition-label-comparing.jpg";
+import goodCarbohydrates from "../assets/good-carbohydrates.jpg";
 
 // Premium curated Unsplash photo IDs that map uniquely to slide topics.
 // Returned as full URLs at a sensible size with absolutely no duplicates.
@@ -106,7 +107,7 @@ const IMAGES: Record<number, string> = {
 
   // Ch 7: Macros, Good Foods & The Plate
   50: combinedMacrosNew, // Macronutrients Overview (combined protein, carbohydrates, and fats - client-provided)
-  51: carbs2, // Good Carbohydrates (carbohydrates 2 image - client-provided)
+  51: goodCarbohydrates, // Good Carbohydrates (carbohydrates 2 image - client-provided)
   52: U("photo-1506976785307-8732e854ad03"), // Good Protein (healthy organic free-range eggs in a bowl)
   53: U("photo-1519708227418-c8fd9a32b7a2"), // Good Fats (healthy salmon dish - unique)
   54: balancedPlateNew, // A Balanced Plate (plate split into 50% veg, 25% protein, 25% carb - client-provided)

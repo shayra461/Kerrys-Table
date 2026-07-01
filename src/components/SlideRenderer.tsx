@@ -949,7 +949,16 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 </div>
               </div>
               <div className="flex justify-center items-center">
-                <SlideImageFrame src={heroImage} alt={slide.title} />
+                <SlideImageFrame 
+                  src={heroImage} 
+                  alt={slide.title} 
+                  objectFit="cover"
+                  className={
+                    heroImage.includes("good-carbohydrates")
+                      ? "aspect-[1080/607] w-full max-w-sm lg:max-w-md xl:max-w-lg mx-auto"
+                      : undefined
+                  }
+                />
               </div>
             </div>
           </SlideShell>
