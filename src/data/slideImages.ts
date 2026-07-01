@@ -33,6 +33,7 @@ import fishAndMilk from "../assets/fish-and-milk.jpg";
 import balancedPlateNew from "../assets/balanced-plate-new.jpg";
 import vegetableChoices from "../assets/vegetable-choices.jpg";
 import healthyEatingTips from "../assets/healthy-eating-tips.jpg";
+import nutritionLabelComparing from "../assets/nutrition-label-comparing.jpg";
 
 // Premium curated Unsplash photo IDs that map uniquely to slide topics.
 // Returned as full URLs at a sensible size with absolutely no duplicates.
@@ -63,7 +64,7 @@ const IMAGES: Record<number, string> = {
   14: U("photo-1454165804606-c3d57bc86b40"), // Calc pair 2
   15: calcPart3, // Calc pair 3 — Coach Kerry portrait (head fix via object-top)
   16: U("photo-1511690656952-34342bb7c2f2"), // Macro breakdown
-  17: nutritionLabel2nd, // Comparing Foods — 2nd nutrition label (client-provided)
+  17: nutritionLabelComparing, // Comparing Foods — 2nd nutrition label (client-provided)
   18: U("photo-1505576399279-565b52d4ac71"), // Evaluate Nutrition Labels Quickly (old slide-11 image — reading label on bottle)
   19: U("photo-1490474418585-ba9bad8fd0ea"), // Important label thresholds (two contrasting breakfast bowls)
   20: smartShopping, // Key Indicators for Smart Shopping — healthy plate (client-provided)

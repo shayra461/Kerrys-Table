@@ -735,7 +735,16 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 </div>
               </div>
               <div className="flex justify-center items-center">
-                <SlideImageFrame src={heroImage} alt={slide.title} />
+                <SlideImageFrame 
+                  src={heroImage} 
+                  alt={slide.title} 
+                  objectFit="cover"
+                  className={
+                    heroImage.includes("nutrition-label-comparing")
+                      ? "aspect-[1292/2048] h-[220px] sm:h-[260px] md:h-[420px] lg:h-[520px] xl:h-[560px] max-h-[55vh] mx-auto"
+                      : undefined
+                  }
+                />
               </div>
             </div>
           </SlideShell>
