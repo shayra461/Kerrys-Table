@@ -5,8 +5,9 @@ import coachPortrait from "@/assets/kerry-ann-walker.jpeg";
 import { imageFor } from "@/data/slideImages";
 
 // Premium framed image component with clean shadow.
-function SlideImageFrame({ src, alt, objectPosition = "center" }: { src: string; alt: string; objectPosition?: string }) {
+function SlideImageFrame({ src, alt, objectPosition = "center", objectFit }: { src: string; alt: string; objectPosition?: string; objectFit?: "cover" | "contain" }) {
   const isDiagram = src.includes("balanced-diet") || (src.includes("balanced-plate") && !src.includes("balanced-plate-new"));
+  const fit = objectFit || (isDiagram ? "contain" : "cover");
 
   return (
     <motion.div
@@ -17,14 +18,14 @@ function SlideImageFrame({ src, alt, objectPosition = "center" }: { src: string;
     >
       {/* Main Image Card — clean consistent shadow, no colored glow */}
       <div
-        className="relative h-full w-full overflow-hidden rounded-[2rem] border border-black/8"
+        className="relative h-full w-full overflow-hidden rounded-[2rem] border border-black/8 bg-white"
         style={{ boxShadow: "0 8px 40px 0 rgba(0,0,0,0.13), 0 1.5px 6px 0 rgba(0,0,0,0.07)" }}
       >
         <img 
           src={src} 
           alt={alt} 
-          className={`size-full ${isDiagram ? "object-contain bg-white/75 p-4" : "object-cover"} transition-transform duration-700 hover:scale-110`}
-          style={!isDiagram ? { objectPosition } : undefined}
+          className={`size-full object-${fit} ${fit === "contain" && isDiagram ? "bg-white/75 p-4" : ""} transition-transform duration-700 hover:scale-110`}
+          style={fit === "cover" ? { objectPosition } : undefined}
           loading="lazy"
         />
       </div>
@@ -317,7 +318,11 @@ export function SlideRenderer({ slide, index }: { slide: Slide; index: number })
                 )}
               </div>
               <div className="flex justify-center items-center">
-                <SlideImageFrame src={heroImage} alt={slide.title} />
+                <SlideImageFrame 
+                  src={heroImage} 
+                  alt={slide.title} 
+                  objectFit={heroImage.includes("healthy-eating-tips") ? "contain" : "cover"} 
+                />
               </div>
             </div>
           </SlideShell>

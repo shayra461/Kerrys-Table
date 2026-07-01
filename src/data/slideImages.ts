@@ -32,6 +32,7 @@ import smartShopping from "../assets/smart-shopping.webp";
 import fishAndMilk from "../assets/fish-and-milk.jpg";
 import balancedPlateNew from "../assets/balanced-plate-new.jpg";
 import vegetableChoices from "../assets/vegetable-choices.jpg";
+import healthyEatingTips from "../assets/healthy-eating-tips.jpg";
 
 // Premium curated Unsplash photo IDs that map uniquely to slide topics.
 // Returned as full URLs at a sensible size with absolutely no duplicates.
@@ -69,7 +70,7 @@ const IMAGES: Record<number, string> = {
   21: coachDoes, // Simple Formula (smart kitchen scale & food tracker tablet - client-provided)
 
   // Ch 4: Better vs Less-Ideal Choices
-  22: U("photo-1504754524776-8f4f37790ca0"), // Healthy Eating Tips (healthy meal prep container - unique)
+  22: healthyEatingTips, // Healthy Eating Tips (5 horizontal strips of tips - client-provided)
   23: betterCarbs, // Better Carb Choices (oats, brown rice, quinoa bowls - client-provided)
   24: U("photo-1509440159596-0249088772ff"), // Less-Ideal Carb Choices (refined white bread, sugary croissants)
   25: healthyFats, // Better Fat Choices — healthy fats image (client-provided)
